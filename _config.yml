@@ -1,0 +1,35 @@
+name: Dirceu Pereira Tiegs
+bio: 'Developer. Book lover. FPS noob.'
+picture: 'assets/images/profile.png'
+
+url: http://dirceu.github.io
+permalink: /:title/
+
+analytics: 'UA-MYANALYTICS'
+disqus: mydisqus
+facebook: dirceutiegs
+twitter: dirceu
+instagram: dirceut
+linkedin: dirceu
+youtube: myyoutube
+spotify: myspotify
+github: dirceu
+email: dirceutiegs@gmail.com
+
+exclude: [README.md, Gemfile, Gemfile.lock, node_modules, gulpfile.js, package.json, _site, src, vendor]
+
+# if you don't need pagination, comment the *paginate* configs below
+# paginate: 5
+# paginate_path: "blog/:num/"
+
+gems:
+  - jemoji
+  - jekyll-mentions
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-paginate
+
+jekyll-mentions:
+    base_url: https://github.com

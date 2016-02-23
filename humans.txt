@@ -1,0 +1,9 @@
+# humanstxt.org/
+
+# TEAM
+
+	Dirceu Pereira Tiegs
+
+# TECHNOLOGY
+
+	HTML5, CSS3, JS, JEKYLL
