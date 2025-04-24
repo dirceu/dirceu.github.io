@@ -44,7 +44,7 @@ This is my default. I use ChatGPT as a context-aware, long-term thinking partner
 
 It remembers. And the [memory](https://x.com/sama/status/1910380643772665873) actually works now. I can resume conversations across days or weeks, and it’ll recall my earlier decisions, preferences, or even my last journaling session. I don't have to re-explain myself every time: this is a massive UX unlock.
 
-Some of my friends are very concerned about privacy, and some even use ChatGPT exclusively with temporary chats. If I were _that_ concerned, I'd likely use a local model instead—but in my case I'm perfectly fine with the risks given the productivity and enjoyment that I get from going all-in: from medical records to journal entries, ChatGPT knows **a lot** about me. I'm OK wiht that.
+Some of my friends are very concerned about privacy, and some even use ChatGPT exclusively with temporary chats. If I were _that_ concerned, I'd likely use a local model instead—but in my case I'm perfectly fine with the risks given the productivity and enjoyment that I get from going all-in: from medical records to journal entries, ChatGPT knows **a lot** about me. I'm OK with that.
 
 Its transcription is the best I've found, and it's able to understand my English accent without any issues—something that's not true anywhere else, really.
 
