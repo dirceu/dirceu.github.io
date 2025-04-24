@@ -113,4 +113,4 @@ I will not renew my subscription for this.
 
 I don't recommend this specific setup for most people. If I were forced to downsize, today I'd keep ChatGPT Plus and Cursor Pro. This might change in the future, as these tools and models are evolving rapidly.
 
-> Thanks to Rafael França and Damian Schenkelman for their feedback.
+_Thanks to Rafael França and Damian Schenkelman for their feedback._
