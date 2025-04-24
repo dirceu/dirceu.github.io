@@ -52,7 +52,7 @@ ZEORaid considers ZODB.POSException.POSError and transaction.interfaces.Transact
     href="https://dirceu.info/apple-touch-icon.png"
   />
 
-  <meta name="generator" content="Hugo 0.145.0">
+  <meta name="generator" content="Hugo 0.146.7">
   <meta itemprop="name" content="GSoC report - week 8">
   <meta itemprop="description" content="I’ve been working on the task I described on my last post, about parallelizing request to multiple backends. After many time getting strange errors on the tests I got to isolate the problem - my code wasn’t handling the exceptions right.
 ZEORaid considers ZODB.POSException.POSError and transaction.interfaces.TransactionError valid answers from storages, as they don’t indicate storage failure. The problem was that I was getting some ConflictErrors (a kind of TransactionError) that were being considered a sign of storage failure when running ZODB tests.">
