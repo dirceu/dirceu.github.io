@@ -1,10 +1,6 @@
 ---
 title: "My AI setup"
 date: 2025-04-24
-_build:
-  list: never
-sitemap:
-  exclude: true
 ---
 
 > TL;DR: to get 90% of the value here, use ChatGPT Plus + SuperWhisper (and if you code, Cursor Pro)

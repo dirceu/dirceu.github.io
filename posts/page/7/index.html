@@ -187,6 +187,52 @@
       class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
     >
 
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">Mini-Review - Erlang Programming</h2>
+  <section><p><a href="http://www.amazon.com/Erlang-Programming-Francesco-Cesarini/dp/0596518188/ref=sr_1_1?ie=UTF8&amp;s=books&amp;qid=1255205652&amp;sr=8-1" title="Erlang Programming">Erlang Programming</a> is probably the best book I&rsquo;ve ever read about a programming language, and is worth reading even if you don&rsquo;t plan to use Erlang.</p>
+<p>The exercises in this book are helping me a lot to learn more about functional programming and recursion; also, it&rsquo;s been a very good experience to use processes and &ldquo;pure&rdquo; functions instead of threading and shared-state.</p>
+<h4 id="book-contents">Book contents</h4>
+<ol>
+<li>Introduction: story, high level overview and cases</li>
+<li>Basic Erlang: data types, shell and patterns matching</li>
+<li>Sequential Erlang: BIFs, conditionals, recursion, libraries and error handling</li>
+<li>Concurrent Programming: process creation and managing, message passing, benchmarks and some theory</li>
+<li>Process Design Patterns: client / server, finite state machines, event managers and handlers</li>
+<li>Process Error Handling: process linking, exit signals, monitors and supervisors</li>
+<li>Records and Macros</li>
+<li>Software Upgrade: hot code swapping</li>
+<li>More Data Types and High-Level Constructs: anonymous functions, list comprehensions, binaries and references</li>
+<li>ETS and Dets Tables</li>
+<li>Distributed Programming in Erlang: communication between erlang nodes</li>
+<li>OTP Behaviours: introduction to generic servers, supervisors and other applications</li>
+<li>Introducing Mnesia</li>
+<li>GUI Programming with wxErlang</li>
+<li>Socket Programming</li>
+<li>Interfacing Erlang with Other Programming Languages</li>
+<li>Trace BIFs, the dbg Tracer, and Match Specifications</li>
+<li>Types and Documentation</li>
+<li>EUnit and Test-Driven Development</li>
+<li>Style and Efficiency</li>
+<li>Appendix - Using Erlang: installing erlang, editors and other tools</li>
+</ol>
+<h4 id="the-good">The good</h4>
+<ul>
+<li>The book have a great structure that teaches the language, functional and concurrent / distributed programming with baby steps;</li>
+<li>It&rsquo;s very well written and formatted;</li>
+<li>Exercises! Every programming language book should provide exercises like these - short, well defined and that sometimes challenging.</li>
+</ul>
+<h4 id="the-bad">The bad</h4>
+<ul>
+<li>The EUnit chapter should be in the beginning. It&rsquo;s boring to compile and test things manually in the shell. Of course, you don&rsquo;t need to read it in order, but still.</li>
+</ul>
+</section>
+  <time class="text-xs antialiased opacity-60"
+    >Oct 10, 2009</time
+  >
+  <a class="absolute inset-0 text-[0px]" href="https://dirceu.info/posts/2009-10-10-mini-review-erlang-programming/"
+    >Mini-Review - Erlang Programming</a
+  >
+</section>
+
 <section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">Dealing with distractions</h2>
   <section><p>Most developers have trouble with distractions. The 5 minutes you take to check Twitter / Hacker News / Google Reader can quickly become 1 hour, and sometimes you need to <em>force</em> yourself to actually do something. This post lists some techniques I&rsquo;ve been using to get more focused time.</p>
 <h4 id="blocking-websites">Blocking websites</h4>
@@ -358,28 +404,6 @@
   >
   <a class="absolute inset-0 text-[0px]" href="https://dirceu.info/posts/2008-08-30-usando-o-git-svn/"
     >Usando o git-svn</a
-  >
-</section>
-
-<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">GSoC Summary</h2>
-  <section><p>As the Google Summer of Code coding period comes to an end, I must write about what I have done, so here we go. My proposed tasks were:</p>
-<!-- raw HTML omitted -->
-<p>The first two weeks were used on this task and on getting myself familiar with gocept.zeoraid codebase. As I said in <!-- raw HTML omitted -->my first report<!-- raw HTML omitted -->, I didn&rsquo;t found anything wrong with the invalidation proccess when doing my tests, so I moved to another task.</p>
-<p><!-- raw HTML omitted -->Task 5<!-- raw HTML omitted --></p>
-<p>This was a reasonably easy one. My main problem was getting an automated test to prove the implementation. It&rsquo;s hard to test a distributed system, and doing the setup is a little problematic; anyway, with help from my mentor, <!-- raw HTML omitted -->Christian Theune<!-- raw HTML omitted -->, I got a working test. My work is on <!-- raw HTML omitted -->this branch<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->Task 4<!-- raw HTML omitted --></p>
-<p>This one was tricky. I had no &ldquo;real world&rdquo; experience on writing threads, so I stepped into many obvious bugs - joining threads, dealing with exception handling and such things. I&rsquo;ve spent almost four weeks working on this task, but in the end I got it right. My work is on <!-- raw HTML omitted -->this branch<!-- raw HTML omitted -->.</p>
-<p><!-- raw HTML omitted -->Task 3<!-- raw HTML omitted --></p>
-<p>I started researching a bit about this task, but Christian said that task 2 was much more important, so I stopped working on it.</p>
-<p><!-- raw HTML omitted -->Task 2<!-- raw HTML omitted --></p>
-<p>My final task over the GSoC period. I started by writing a &ldquo;add&rdquo; command to the ZEORaid command-line tool, as I described in <!-- raw HTML omitted -->this report<!-- raw HTML omitted -->. It was easy to get this working for ClientStorage objects, but I needed to get it working with other types of storages too; some time later Christian said that it was only a &ldquo;helper&rdquo; for me to understand better the way that ZEORaid handles storages and openers.</p>
-<p>I dropped this implementation and started working on reloading the entire config file. I got it working in a couple of days, but spent <em>much</em> more time than that working on an automated test for it. My work is on <!-- raw HTML omitted -->this branch<!-- raw HTML omitted -->.</p>
-</section>
-  <time class="text-xs antialiased opacity-60"
-    >Aug 18, 2008</time
-  >
-  <a class="absolute inset-0 text-[0px]" href="https://dirceu.info/posts/2008-08-18-gsoc-summary/"
-    >GSoC Summary</a
   >
 </section><nav class="mt-14 flex"><a class="btn not-prose" href="/posts/page/6/"
     >←Prev Page</a

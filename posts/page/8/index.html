@@ -187,6 +187,28 @@
       class="prose prose-neutral dark:prose-invert relative mx-auto min-h-[calc(100vh-9rem)] max-w-(--w) px-8 pt-14 pb-16"
     >
 
+<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">GSoC Summary</h2>
+  <section><p>As the Google Summer of Code coding period comes to an end, I must write about what I have done, so here we go. My proposed tasks were:</p>
+<!-- raw HTML omitted -->
+<p>The first two weeks were used on this task and on getting myself familiar with gocept.zeoraid codebase. As I said in <!-- raw HTML omitted -->my first report<!-- raw HTML omitted -->, I didn&rsquo;t found anything wrong with the invalidation proccess when doing my tests, so I moved to another task.</p>
+<p><!-- raw HTML omitted -->Task 5<!-- raw HTML omitted --></p>
+<p>This was a reasonably easy one. My main problem was getting an automated test to prove the implementation. It&rsquo;s hard to test a distributed system, and doing the setup is a little problematic; anyway, with help from my mentor, <!-- raw HTML omitted -->Christian Theune<!-- raw HTML omitted -->, I got a working test. My work is on <!-- raw HTML omitted -->this branch<!-- raw HTML omitted -->.</p>
+<p><!-- raw HTML omitted -->Task 4<!-- raw HTML omitted --></p>
+<p>This one was tricky. I had no &ldquo;real world&rdquo; experience on writing threads, so I stepped into many obvious bugs - joining threads, dealing with exception handling and such things. I&rsquo;ve spent almost four weeks working on this task, but in the end I got it right. My work is on <!-- raw HTML omitted -->this branch<!-- raw HTML omitted -->.</p>
+<p><!-- raw HTML omitted -->Task 3<!-- raw HTML omitted --></p>
+<p>I started researching a bit about this task, but Christian said that task 2 was much more important, so I stopped working on it.</p>
+<p><!-- raw HTML omitted -->Task 2<!-- raw HTML omitted --></p>
+<p>My final task over the GSoC period. I started by writing a &ldquo;add&rdquo; command to the ZEORaid command-line tool, as I described in <!-- raw HTML omitted -->this report<!-- raw HTML omitted -->. It was easy to get this working for ClientStorage objects, but I needed to get it working with other types of storages too; some time later Christian said that it was only a &ldquo;helper&rdquo; for me to understand better the way that ZEORaid handles storages and openers.</p>
+<p>I dropped this implementation and started working on reloading the entire config file. I got it working in a couple of days, but spent <em>much</em> more time than that working on an automated test for it. My work is on <!-- raw HTML omitted -->this branch<!-- raw HTML omitted -->.</p>
+</section>
+  <time class="text-xs antialiased opacity-60"
+    >Aug 18, 2008</time
+  >
+  <a class="absolute inset-0 text-[0px]" href="https://dirceu.info/posts/2008-08-18-gsoc-summary/"
+    >GSoC Summary</a
+  >
+</section>
+
 <section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">GSoC Report - Week 12</h2>
   <section><p>Quick report: this week I&rsquo;ve finished the &lsquo;reloading&rsquo; task - now with automated tests, thanks to the help of <!-- raw HTML omitted -->Christian<!-- raw HTML omitted -->, my mentor. Now I need to document my <!-- raw HTML omitted -->branches<!-- raw HTML omitted --> and write a post about what I&rsquo;ve done on the coding period. I need to do this on this weekend, because next monday is &lsquo;pencils down&rsquo; date, when all mentors must submit a final evaluation of the work done by their students.</p>
 </section>
@@ -304,25 +326,6 @@
   >
   <a class="absolute inset-0 text-[0px]" href="https://dirceu.info/posts/2008-05-11-gsoc-application-accepted/"
     >GSoC Application Accepted!</a
-  >
-</section>
-
-<section class="relative my-10 first-of-type:mt-0 last-of-type:mb-0"><h2 class="my-0!">PyConBrasil 3</h2>
-  <section><p>A PyConBrasil III reúne usuários e interessados na linguagem Python para alguns dias de palestras, treinamentos e confraternização. Este é um evento itinerante - já esteve em Campinas, Brasília e esse ano foi em Joinville / SC (poucas horas aqui de casa), nos dias 30 e 31 de agosto e 1o de setembro.</p>
-<p>Um dia antes do começo do evento, dia 29/30, tivemos uma assembléia da Associação Python Brasil destinada a eleição da nova diretoria e de partes do conselho fiscal e do conselho deliberativo. Infelizmente, por causa do mau tempo e consequente fechamento dos aeroportos de Joinville e Curitiba, relativamente poucas pessoas estiveram presentes. Aliás, fui eleito por unanimida&hellip; OK, OK, por W.O., não tinha concorrência, para membro do conselho fiscal. Me disponibilizei como voluntário e espero poder ajudar no que for possível.</p>
-<p>No primeiro dia do evento tivemos algumas palestras do pessoal da &ldquo;firma&rdquo;, inclusive uma palestra minha sobre Grok. Foi a primeira palestra que apresentei na vida, portanto está cheia das gafes comuns aos iniciantes, como vários &ldquo;aaannnn&hellip;&rdquo;, &ldquo;bom, &quot; e corpo &ldquo;travado&rdquo;. Apesar dos pesares, fui bastante elogiado pelo conteúdo da palestra.</p>
-<p>Detalhe importante: várias pessoas vieram falar comigo dizendo coisas como &ldquo;CARACA, QUE CAMISETA HORRÍVEL!&rdquo; ou &ldquo;Ai meu filho, por quê você não usou uma daquelas camisetas pretas bonitas do evento?&rdquo; (minha mãe, obviamente). Duas coisas:</p>
-<!-- raw HTML omitted -->
-<p>Menção honrosa a minha total inabilidade como inglês falado: meu inglês para leitura e escrita (e até para &ldquo;audio&rdquo;) é muito bom, não tenho problemas. Entretanto, no meio do treinamento o Nate Aune (da Jazkarta / Plone4Artists) me pediu algumas informações e, vergonhosamente, o máximo que consegui foi soltar uns monossilábicos e depois digitar algumas coisas para ele no notebook. Acho que fiquei meio &ldquo;travado&rdquo; por vergonha de errar algo na frente de alguém que fala inglês nativamente mas, bem, isso só tornou as coisas piores. Preciso voltar a praticar essa bagaça.</p>
-<p>Como disse antes, o pessoal da Weimar Consultoria (empresa em que trabalho) apresentou várias palestras e treinamentos na PyConBrasil. Algumas palestras foram do JS (acrônimo recursivo para João Sebastião de Oliveira Bueno Calligaris), as quais ele apresentou com o meu iBook. Lógico, não sem que Murphy se apresentasse. Na primeira palestra dele o iBook TRAVOU, me forçando a ir até o palco tentar consertar as coisas e só poder dizer &ldquo;JS, f*deu&rdquo; e desligar o notebook. Detalhe: isso não aconteceu em NENHUM dos testes para a palestra, e é a segunda vez na minha vida que vejo esse iBook travar. Murphy comanda. :-/</p>
-<p>Foram várias palestras muito interessantes de vários gurus da comunidade, como Luciano Ramalho, Osvaldo Santana, Dorneles Treméa, Gustavo Niemeyer e muitas de pessoas que eu não conhecia e que foram <em>muito</em> legais. Uma palestra particularmente inspiradora foi a apresentação sobre Empreendedorismo do Dorneles Treméa (vulgo Déo); ele contou o começo da empresa que ele montou com Xiru (Fabiano Weimar, hoje meu chefe), Sidnei da Silva e outros caras, todas as dificuldades que eles tiveram, os pontos acertados e como ele vive hoje. Muito legal mesmo.</p>
-<p>No fim das contas, não hesito em dizer que foi o melhor evento técnico do qual já participei, tanto pelo nível das palestras e palestrantes quanto pelas pessoas que lá estavam. A comunidade Python é melhor :-).</p>
-</section>
-  <time class="text-xs antialiased opacity-60"
-    >Sep 14, 2007</time
-  >
-  <a class="absolute inset-0 text-[0px]" href="https://dirceu.info/posts/2007-09-14-pyconbrasil-3/"
-    >PyConBrasil 3</a
   >
 </section><nav class="mt-14 flex"><a class="btn not-prose" href="/posts/page/7/"
     >←Prev Page</a
