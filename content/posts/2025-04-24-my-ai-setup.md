@@ -9,6 +9,8 @@ Friends keep asking “Which AI tools do you actually pay for? What should I use
 
 I pay for a ton of AI tools. I'm explicitly aiming to be at the edge here and learn about different tools and capabilities first-hand—both because I'm curious about it, but also because I'm very interested at the intersection of AI and productivity, so I'm willing to pay to be at the forefront. I definitely don't recommend this specific setup for everyone, but it works for me.
 
+I haven't included here tools I've only experimented a bit with (such as [Manus](https://manus.im) or [DeepSeek](https://deepseek.ai)), and I haven't included any local models (I might write a separate post about that in the future).
+
 Right now these are the tools I'm paying for either monthly or yearly:
 
 | Tool | Plan | What do I use it for? | Will I renew? |
