@@ -3,7 +3,6 @@ title: "How I use AI"
 date: 2025-04-24
 _build:
   list: never
-  render: link
 sitemap:
   exclude: true
 ---
