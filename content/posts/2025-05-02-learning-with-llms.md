@@ -1,10 +1,6 @@
 ---
 title: "Learning with AI"
 date: 2025-05-02
-_build:
-  list: never
-sitemap:
-  exclude: true
 ---
 
 [![@sama: if you are not skillsmaxxing with o3 at minimum 3 hours every day, ngmi](/images/sama-skillsmaxxing.png)](https://x.com/sama/status/1915826042729861357)

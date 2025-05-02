@@ -6,8 +6,15 @@
     <description>Recent content on @dirceu</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 May 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://dirceu.info/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Learning with AI</title>
+      <link>https://dirceu.info/posts/2025-05-02-learning-with-llms/</link>
+      <pubDate>Fri, 02 May 2025 00:00:00 +0000</pubDate>
+      <guid>https://dirceu.info/posts/2025-05-02-learning-with-llms/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://x.com/sama/status/1915826042729861357&#34;&gt;&lt;img src=&#34;https://dirceu.info/images/sama-skillsmaxxing.png&#34; alt=&#34;@sama: if you are not skillsmaxxing with o3 at minimum 3 hours every day, ngmi&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;About a month ago I &lt;a href=&#34;https://x.com/dirceu/status/1903238828082487642&#34;&gt;quit my job as an engineering manager at Shopify&lt;/a&gt; because I wanted to take some time to go deeper on LLMs. &amp;ldquo;Going deeper on LLMs&amp;rdquo; is hand-wavy on purpose: I wanted to explore a bunch of different things—developer experience, safety, interpretability, even the fundamentals of neural networks and deep learning. At a meta level, I also wanted to use LLMs 10x more throughout my day to find out how I can use them more effectively and what are the friction points I could explore in prototypes or research.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>My AI setup</title>
       <link>https://dirceu.info/posts/2025-04-24-my-ai-setup/</link>
