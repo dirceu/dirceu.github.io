@@ -1,5 +1,5 @@
 ---
-title: "Learning with LLMs"
+title: "Learning with AI"
 date: 2025-05-02
 _build:
   list: never
@@ -11,15 +11,19 @@ sitemap:
 
 About a month ago I [quit my job as an engineering manager at Shopify](https://x.com/dirceu/status/1903238828082487642) because I wanted to take some time to go deeper on LLMs. "Going deeper on LLMs" is hand-wavy on purpose: I wanted to explore a bunch of different things—developer experience, safety, interpretability, even the fundamentals of neural networks and deep learning. At a meta level, I also wanted to use LLMs 10x more throughout my day to find out how I can use them more effectively and what are the friction points I could explore in prototypes or research.
 
-Lately, I got into a nice groove of spending a few hours every single day (7 days a week) learning different things. This post is a snapshot of my process right now.
+Lately, I got into a nice groove of spending a few hours every single day (7 days a week) learning different things. This post is a snapshot of my current process.
 
-### Before we go into that: "consuming" knowledge doesn't work
+I don't use this full process for everything, but found it to be very useful when trying to learn something completely new or to go deeper into something I only know superficially. This is more about diving into areas like fine-tuning or neural network interpretability in a practical way such that I get *employably competent* at it.
 
-This is the most important point about all this, more important than any individual tactic. Andy Matuschak's essay [Why books don't work](https://andymatuschak.org/books) explains this very well, and Andrej Karpathy [echoes the main point of it](https://x.com/karpathy/status/1756380066580455557): **if "learning" feels effortless, you're probably not *really* learning**.
+### Before we go into that: "consuming" content doesn't work for learning
+
+This is the most important point about all this, more important than any individual tactic. Andy Matuschak's essay [Why books don't work](https://andymatuschak.org/books) explains this very well, and Andrej Karpathy [echoes the main point of it](https://x.com/karpathy/status/1756380066580455557): **if "learning" feels effortless, you're *probably* not really learning**.
 
 We don’t **really** learn or understand something just by listening to a lecture, reading a book, or watching a video. *Real* learning, *real* understanding comes from actively engaging with the content.
 
 We might _feel_ like we got a good grasp on a concept, and we might be able to even recite a definition about it if someone asks, but this is (in most cases) a rather superficial “understanding” that breaks even with just a little bit of probing—a follow-up question or the need to use the concept in practice in a work-related task, for example.
+
+_(Sure, repeated exposure to topics might help you understand things over time and do pattern-matching, but what I'm talking about here is building tacit knowledge—the kind of understanding you gain through experience, the stuff that's hard to write down but essential for practical application.)_
 
 How does one engage with content? Some examples include:
 
@@ -31,8 +35,6 @@ How does one engage with content? Some examples include:
 - Talking about it
 - Doing active recall on it
 - Committing it to long-term memory using spaced repetition (e.g. flashcards on Anki)
-
-LLMs are now so good that it's pointless (or at the very least counterproductive) to read any non-fiction without LLM assistance.
 
 ### How LLMs can help
 
@@ -64,7 +66,7 @@ Things might still be fuzzy in my head, so I do another brain dump by talking. I
 
 I get my answer and then do a bit of back-and-forth to clarify things. This might go for a while!
 
-Every now and then I might do another brain dump or even restart the entire process if we went in a direction that doesn't seem particularly interesting or aligned with what I'm looking for (and at this point, o3 already helped me refine much more precisely what is it that I'm looking for).
+Every now and then I might do another brain dump or even restart the entire process if we went in a direction that doesn't seem particularly interesting or aligned with what I'm looking for (and at this point, o3 already helped me refine much more precisely what I'm looking for).
 
 #### Phase 3: Taking action
 
@@ -97,10 +99,43 @@ Then, I continue exploring with o3, Cursor, and sometimes even Googling (*gasp!*
 
 As I learn all this, I usually also write [Anki](https://apps.ankiweb.net) flashcards to commit things to memory. I try not to overuse it, but I've found it to be helpful: active recall, actually testing yourself is incredibly useful for learning and retention. See more [here](https://gwern.net/spaced-repetition).
 
+### Bonus: Custom Instructions and prompt snippets
+
+Some friends asked me to share prompts, but I do a **ton** of my LLM usage via voice in a very unstructured, verbose way: I yap until I get tired. Models are incredibly capable nowadays!
+
+Still, there are sentences I find myself repeating in multiple occasions, as well as some sentences that I found helpful to add to my Custom Instructions.
+
+#### Custom Instructions
+
+Be opinionated, push back, and ask questions that help me think about things in a different way.
+
+Don't worry about formalities.
+
+When learning new concepts, I find analogies and concrete examples particularly helpful.
+
+If I ask you to create Anki cards, make sure to:
+- Only use Basic (front/back) and Cloze deletion as formats.
+- Format the response to make it extra easy to copy-paste into Anki.
+- Break things down as much as possible. I'd rather have 15 different cards for a single concept (if they're all atomic and exploring different facets of it, or different relationships between it and other things) than one gigantic card.
+- For Basic cards, always phrase the title as a question.
+
+When I prompt you with the single word "GENSUM", this indicates that I want you to generate a summary of the conversation to this point as an artifact, which I will use in later conversations. I want you to include as much detail as possible that could be useful to reference later. The artifact title should be "Chat GENSUM <iso 8601 date> [(<index>)]" -- for example, "Chat GENSUM 2020-01-01" and then "Chat GENSUM 2020-01-01 (1)". _(pretty sure I got this one from [Burke](https://x.com/burkelibbey))_
+
+#### Sentences or questions I use often
+
+- This is what I understood: tell me where I'm wrong.
+- These are all the things I know I don't know. What else am I missing?
+- Summarize what I just told you, and then interview me: ask as many questions as you want in order to really get at what I'm trying to learn / do.
+- Explain this in increasing levels of complexity (e.g. 12 years old, undergrad, PhD).
+- Help me visualize this with Canvas / with an Artifact.
+- What else should I be asking about this subject?
+
 ### Conclusion
 
-I'm still evolving this process, trying to make it more streamlined in a way, without removing the effortful parts that are useful for learning.
+I'm still evolving this process—trying to make it more streamlined in a way, without removing the effortful parts that are useful for learning. Using AI has drastically accelerated the speed by which I learn new ideas, concepts, and skills; I feel more capable and most importantly: I'm having **a lot** of fun.
 
 If you have any thoughts or ideas for how I can improve this, let me know!
 
 † _[How to Read a Book](https://fs.blog/how-to-read-a-book/) is an excellent tool for anyone that reads a lot for understanding (as opposed to for entertainment). One of the main lessons that stuck with me is that you should **always** read with a particular goal or problem in mind, which makes your actions more intentional, focused, and results-oriented. This is extremely useful in the world of LLMs._
+
+_Thanks to Hernan Maydac Jean, Damian Schenkelman, and Alexandre Terrasa for their feedback._
