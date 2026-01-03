@@ -3,8 +3,7 @@ title: "What I’m doing now"
 date: 2016-06-24
 ---
 
-- 🇨🇦 Living in Ottawa, Canada
-- 💸 Just quit my job at Shopify, where I worked on developer productivity for 6 years
-- 📚 On sabbatical, digging deeper into LLMs
+- 🇨🇦 Living in Ottawa, Canada, but moving to Toronto soon
+- 💼 Working on Sidekick at Shopify (yes, I'm back!)
 
-Last updated on Mar 22nd, 2025. Inspired by nownownow.
+Last updated on Jan 3rd, 2026. Inspired by [nownownow](https://nownownow.com).
