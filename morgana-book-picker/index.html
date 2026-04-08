@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Seletor de ficção curta da Morgana</title>
+<style>
+    :root {
+      --bg: #f7f5f1;
+      --panel: #ffffff;
+      --panel-2: #f1ede7;
+      --text: #1f1b17;
+      --muted: #6a6157;
+      --border: #dfd7cd;
+      --accent: #7a4b2c;
+      --accent-soft: #efe3d7;
+      --shadow: 0 10px 30px rgba(20, 16, 12, 0.08);
+      --light: #eef7ef;
+      --mixed: #f3f1ff;
+      --dark: #fff0f0;
+      --easy: #e7f5ec;
+      --medium: #eef2ff;
+      --dense: #fff4e5;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #f9f7f4 0%, #f5f1eb 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { color: var(--accent); }
+    .page {
+      width: min(1380px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #fffaf4 0%, #fff 60%, #f7efe6 100%);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid #e5d2c2;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+    }
+    .hero p {
+      margin: 0;
+      max-width: 75ch;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+	    .hero-grid {
+	      display: grid;
+	      grid-template-columns: 1.5fr 1fr;
+	      align-items: start;
+	      gap: 24px;
+	      margin-top: 18px;
+	    }
+	    .notes, .legend, .starter-box {
+	      background: rgba(255,255,255,0.72);
+	      border: 1px solid var(--border);
+	      border-radius: 22px;
+	      padding: 18px;
+	      align-self: start;
+	    }
+    .notes ul, .legend ul, .starter-box ul {
+      margin: 10px 0 0 20px;
+      padding: 0;
+      color: var(--muted);
+    }
+    .starter-box ol {
+      margin: 10px 0 0 20px;
+      padding: 0;
+      color: var(--muted);
+    }
+    .controls {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(247,245,241,0.88);
+      backdrop-filter: blur(10px);
+      padding: 14px 0 12px;
+      margin-bottom: 12px;
+    }
+    .controls-panel {
+      background: rgba(255,255,255,0.85);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+	    .search-row {
+	      display: grid;
+	      grid-template-columns: minmax(0, 1fr) auto auto;
+	      align-items: start;
+	      gap: 10px;
+	      margin-bottom: 12px;
+	    }
+    .search-input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      font-size: 1rem;
+      background: #fff;
+      color: var(--text);
+    }
+    .button-secondary {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .button-secondary.active {
+      background: var(--accent-soft);
+      border-color: #d7bea8;
+      color: #5d351b;
+    }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chip {
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 0.92rem;
+      line-height: 1;
+    }
+    .chip.active {
+      background: var(--accent-soft);
+      border-color: #d7bea8;
+      color: #5d351b;
+      font-weight: 700;
+    }
+    .chip-count {
+      opacity: 0.68;
+      margin-left: 4px;
+    }
+    .stats {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+    .top-picks {
+      margin: 22px 0 28px;
+      background: linear-gradient(180deg, #fff 0%, #f7f2ec 100%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .top-picks h2 {
+      margin: 0 0 8px;
+      font-size: 1.6rem;
+    }
+    .top-picks p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+	    .top-pick-grid, .book-grid {
+	      display: grid;
+	      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+	      gap: 16px;
+	    }
+    .category-section {
+      margin: 30px 0;
+    }
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .section-count {
+      color: var(--muted);
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+	    .book-card {
+	      display: grid;
+	      grid-template-columns: 116px minmax(0, 1fr);
+	      align-items: start;
+	      gap: 14px;
+	      background: rgba(255,255,255,0.92);
+	      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      min-height: 100%;
+    }
+	    .cover-wrap {
+	      position: relative;
+	      width: 116px;
+	      height: 174px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #efe4d9, #e4d6c7);
+      border: 1px solid #dbcdbd;
+	      flex-shrink: 0;
+	    }
+	    .card-body {
+	      min-width: 0;
+	    }
+	    .cover {
+	      width: 100%;
+	      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: #f2ece4;
+    }
+    .cover-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      padding: 10px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #5a4637;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.7), rgba(255,255,255,0) 40%),
+        linear-gradient(135deg, #e8d8c9, #d8c4b0);
+    }
+    .cover-fallback-title {
+      font-weight: 800;
+      font-size: 0.95rem;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .cover-fallback-author {
+      font-size: 0.82rem;
+      opacity: 0.86;
+      line-height: 1.2;
+    }
+	    .title-row {
+	      display: flex;
+	      align-items: flex-start;
+	      justify-content: space-between;
+	      gap: 10px;
+	    }
+	    .title-row > :first-child {
+	      flex: 1 1 auto;
+	      min-width: 0;
+	    }
+	    .title-row h3 {
+	      margin: 0;
+	      font-size: 1.1rem;
+	      line-height: 1.2;
+	      overflow-wrap: anywhere;
+	    }
+	    .author {
+	      margin: 4px 0 0;
+	      color: var(--muted);
+	      font-size: 0.93rem;
+	      overflow-wrap: anywhere;
+	    }
+	    .shortlist-btn {
+	      cursor: pointer;
+	      border-radius: 999px;
+      border: 1px solid #dfc2c2;
+      background: #fff7f7;
+      color: #8f3948;
+      padding: 8px 10px;
+	      font-size: 0.85rem;
+	      font-weight: 700;
+	      white-space: nowrap;
+	      flex-shrink: 0;
+	    }
+    .shortlist-btn.active {
+      background: #8f3948;
+      border-color: #8f3948;
+      color: white;
+    }
+    .meta-row, .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pill, .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 0.8rem;
+      line-height: 1;
+      border: 1px solid var(--border);
+      background: #fbfaf8;
+    }
+    .pill.meta {
+      background: #f8f4ef;
+    }
+    .pill.difficulty.diff-easier { background: var(--easy); border-color: #cfe9d7; }
+    .pill.difficulty.diff-medium { background: var(--medium); border-color: #d8dff6; }
+    .pill.difficulty.diff-medium-plus,
+    .pill.difficulty.diff-dense { background: var(--dense); border-color: #ebd7b6; }
+    .pill.tone.tone-light { background: var(--light); border-color: #d6ead8; }
+    .pill.tone.tone-mixed { background: var(--mixed); border-color: #e0d9f3; }
+    .pill.tone.tone-dark { background: var(--dark); border-color: #f0d0d0; }
+    .synopsis {
+      margin: 12px 0 0;
+      color: #342e28;
+    }
+    .like-if {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+    .caution {
+      margin: 10px 0 0;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: #fff7ea;
+      border: 1px solid #edd9b0;
+      color: #6c5427;
+      font-size: 0.94rem;
+    }
+    .tag {
+      background: #f6f1eb;
+      color: #5d5449;
+    }
+    .card-actions {
+      margin-top: 12px;
+    }
+	    .action-link {
+	      display: inline-flex;
+	      align-items: center;
+	      font-weight: 700;
+	      text-decoration: none;
+	      padding: 10px 12px;
+	      border-radius: 12px;
+	      background: var(--accent-soft);
+	      border: 1px solid #e0ccba;
+	      max-width: 100%;
+	      overflow-wrap: anywhere;
+	    }
+	    .book-card,
+	    .category-section {
+	      scroll-margin-top: 120px;
+	    }
+	    .hidden {
+	      display: none !important;
+	    }
+    .empty-state {
+      display: none;
+      margin: 24px 0;
+      background: white;
+      border: 1px dashed var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      color: var(--muted);
+      text-align: center;
+    }
+    footer {
+      margin-top: 36px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+	    @media (max-width: 780px) {
+	      .search-row {
+	        grid-template-columns: 1fr;
+	      }
+	      .book-card {
+	        grid-template-columns: 92px minmax(0, 1fr);
+	      }
+	      .cover-wrap {
+	        width: 92px;
+	        height: 138px;
+      }
+      .title-row {
+        flex-direction: column;
+      }
+    }
+	    @media (max-width: 520px) {
+	      .page {
+	        width: calc(100% - 18px);
+	      }
+      .hero, .top-picks, .controls-panel {
+        border-radius: 22px;
+      }
+      .book-card {
+        grid-template-columns: 1fr;
+      }
+      .cover-wrap {
+        width: 100%;
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+<header class="hero">
+<div class="eyebrow">Para Morgana</div>
+<h1>40 sugestões de ficção em inglês, curtas e boas para Kindle</h1>
+<p>Eu puxei a seleção para livros fáceis de começar: em sua maioria com menos de 250 páginas, novelas ou coletâneas de contos; com linguagem mais moderna; e títulos que pareciam ter edição Kindle durante a pesquisa. A ideia aqui não é “a melhor literatura”, e sim “o que pode ser realmente divertido para voltar a ler em inglês”.</p>
+<div class="hero-grid">
+<div class="notes">
+<strong>Como eu filtrei:</strong>
+<ul>
+<li>Livros curtos primeiro: em geral com menos de 250 páginas, com algumas exceções se ainda derem para ler em pedacinhos bem pequenos.</li>
+<li>Inglês mais moderno e usável primeiro; qualquer coisa mais antiga ou densa está claramente sinalizada.</li>
+<li>Variedade de gostos: drama, romance, sobrenatural, terror, queer, japonês/coreano, cozy, detetive, YA, estranho.</li>
+<li>A contagem de páginas pode variar conforme a edição, especialmente em ebooks e títulos traduzidos.</li>
+</ul>
+</div>
+<div>
+<div class="starter-box">
+<strong>Apostas mais seguras para um “primeiro livro em inglês”:</strong>
+<ol>
+<li><a href="#gossip-girl-cecily-von-ziegesar">Gossip Girl</a></li><li><a href="#nick-norah-s-infinite-playlist-rachel-cohn-david-levithan">Nick &amp; Norah's Infinite Playlist</a></li><li><a href="#a-psalm-for-the-wild-built-becky-chambers">A Psalm for the Wild-Built</a></li><li><a href="#small-miracles-olivia-atwater">Small Miracles</a></li><li><a href="#the-kamogawa-food-detectives-hisashi-kashiwai">The Kamogawa Food Detectives</a></li><li><a href="#convenience-store-woman-sayaka-murata">Convenience Store Woman</a></li><li><a href="#the-guest-cat-takashi-hiraide">The Guest Cat</a></li><li><a href="#the-westing-game-ellen-raskin">The Westing Game</a></li>
+</ol>
+</div>
+<div class="legend" style="margin-top:12px;">
+<strong>Legenda:</strong>
+<ul>
+<li>Inglês mais fácil = ponto inicial de menor atrito.</li>
+<li>Médio = ainda administrável, só um pouco mais literário ou estilizado.</li>
+<li>Denso = provavelmente não é a primeira escolha, a menos que a vibração seja irresistível.</li>
+</ul>
+</div>
+</div>
+</div>
+</header>
+<div class="controls">
+<div class="controls-panel">
+<div class="search-row">
+<input class="search-input" id="searchInput" oninput="applyFilters()" placeholder="Busque por título, autora, vibe, categoria ou palavras-chave…" type="search"/>
+<button class="button-secondary" id="shortlistOnlyBtn" onclick="toggleShortlistOnly()" type="button">Mostrar só a lista curta</button>
+<button class="button-secondary" onclick="clearAllFilters()" type="button">Limpar filtros</button>
+</div>
+<div class="chip-row" id="categoryChips">
+<button class="chip active" data-category="all" onclick="setCategoryFilter('all', this)" type="button">Todas as categorias</button>
+<button class="chip" data-category="Drama teen / entrada fácil" onclick="setCategoryFilter('Drama teen / entrada fácil', this)" type="button">Drama teen / entrada fácil <span class="chip-count">5</span></button>
+<button class="chip" data-category="Aconchegante / suave / gostosinho" onclick="setCategoryFilter('Aconchegante / suave / gostosinho', this)" type="button">Aconchegante / suave / gostosinho <span class="chip-count">5</span></button>
+<button class="chip" data-category="Japonês / coreano / traduzido" onclick="setCategoryFilter('Japonês / coreano / traduzido', this)" type="button">Japonês / coreano / traduzido <span class="chip-count">11</span></button>
+<button class="chip" data-category="Especulativo / sobrenatural / romântico" onclick="setCategoryFilter('Especulativo / sobrenatural / romântico', this)" type="button">Especulativo / sobrenatural / romântico <span class="chip-count">7</span></button>
+<button class="chip" data-category="Terror / estranho / diversão sombria" onclick="setCategoryFilter('Terror / estranho / diversão sombria', this)" type="button">Terror / estranho / diversão sombria <span class="chip-count">8</span></button>
+<button class="chip" data-category="Mistério / inteligente / quebra-cabeça" onclick="setCategoryFilter('Mistério / inteligente / quebra-cabeça', this)" type="button">Mistério / inteligente / quebra-cabeça <span class="chip-count">3</span></button>
+<button class="chip" data-category="Contos / estranheza em pequenas doses" onclick="setCategoryFilter('Contos / estranheza em pequenas doses', this)" type="button">Contos / estranheza em pequenas doses <span class="chip-count">1</span></button>
+</div>
+<div class="stats" id="statsLine">Mostrando todos os 40 livros.</div>
+</div>
+</div>
+<section class="top-picks">
+<h2>Melhores primeiras escolhas</h2>
+<p>Se ela quiser a maior chance de realmente se envolver, eu começaria por aqui antes de se aventurar pelas opções mais escuras ou densas.</p>
+<div class="top-pick-grid">
+<article class="book-card top-pick-card" data-book-id="gossip-girl-cecily-von-ziegesar" data-category="Drama teen / entrada fácil" data-english="Easier" data-search="gossip girl cecily von ziegesar drama teen / entrada fácil escândalo, conexões, traição e guerra social entre adolescentes ricos do upper east side. você vai gostar se... ela gosta de drama brilhante, bagunça de garoto rico e capítulos que avançam rápido. ya fofoca romance energia do drama de tv fácil 224 págs. inglês mais fácil tom leve" data-tone="Light" id="gossip-girl-cecily-von-ziegesar">
+<div class="cover-wrap">
+<img alt="Capa de Gossip Girl" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/gossip-girl-cecily-von-ziegesar.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Gossip Girl</div>
+<div class="cover-fallback-author">Cecily von Ziegesar</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Gossip Girl</h3>
+<p class="author">Cecily von Ziegesar</p>
+</div>
+<button class="shortlist-btn" data-book-id="gossip-girl-cecily-von-ziegesar" onclick="toggleShortlist('gossip-girl-cecily-von-ziegesar')" type="button">❤ Talvez</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">224 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Escândalo, conexões, traição e guerra social entre adolescentes ricos do Upper East Side.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela gosta de drama brilhante, bagunça de garoto rico e capítulos que avançam rápido.</p>
+<div class="tag-row"><span class="tag">YA</span><span class="tag">fofoca</span><span class="tag">romance</span><span class="tag">Energia do drama de TV</span><span class="tag">fácil</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Gossip+Girl+Cecily+von+Ziegesar+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card top-pick-card" data-book-id="nick-norah-s-infinite-playlist-rachel-cohn-david-levithan" data-category="Drama teen / entrada fácil" data-english="Easier" data-search="nick &amp; norah's infinite playlist rachel cohn &amp; david levithan drama teen / entrada fácil dois adolescentes passam uma noite caótica vagando por nova york, perseguindo uma banda, esquivando-se de ex-namorados e caindo na órbita um do outro. você vai gostar se... ela quer brincadeiras, flertes e uma voz moderna muito conversadora. ya romance brincadeira música fácil 183 págs. inglês mais fácil tom leve" data-tone="Light" id="nick-norah-s-infinite-playlist-rachel-cohn-david-levithan">
+<div class="cover-wrap">
+<img alt="Capa de Nick &amp; Norah's Infinite Playlist" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/nick-norah-s-infinite-playlist-rachel-cohn-david-levithan.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Nick &amp; Norah's Infinite Playlist</div>
+<div class="cover-fallback-author">Rachel Cohn &amp; David Levithan</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Nick &amp; Norah's Infinite Playlist</h3>
+<p class="author">Rachel Cohn &amp; David Levithan</p>
+</div>
+<button class="shortlist-btn" data-book-id="nick-norah-s-infinite-playlist-rachel-cohn-david-levithan" onclick="toggleShortlist('nick-norah-s-infinite-playlist-rachel-cohn-david-levithan')" type="button">❤ Talvez</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">183 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Dois adolescentes passam uma noite caótica vagando por Nova York, perseguindo uma banda, esquivando-se de ex-namorados e caindo na órbita um do outro.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer brincadeiras, flertes e uma voz moderna muito conversadora.</p>
+<div class="tag-row"><span class="tag">YA</span><span class="tag">romance</span><span class="tag">brincadeira</span><span class="tag">música</span><span class="tag">fácil</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Nick+%26+Norah%27s+Infinite+Playlist+Rachel+Cohn+%26+David+Levithan+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card top-pick-card" data-book-id="a-psalm-for-the-wild-built-becky-chambers" data-category="Aconchegante / suave / gostosinho" data-english="Easier" data-search="a psalm for the wild-built becky chambers aconchegante / suave / gostosinho um monge do chá conhece um robô e começa a perguntar o que realmente é uma vida boa. você vai gostar se... ela quer algo curto, gentil e que cure silenciosamente, em vez de um enredo pesado. aconchegante ficção científica esperançoso curto filosófico 160 págs. inglês mais fácil tom leve" data-tone="Light" id="a-psalm-for-the-wild-built-becky-chambers">
+<div class="cover-wrap">
+<img alt="Capa de A Psalm for the Wild-Built" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/a-psalm-for-the-wild-built-becky-chambers.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">A Psalm for the Wild-Built</div>
+<div class="cover-fallback-author">Becky Chambers</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>A Psalm for the Wild-Built</h3>
+<p class="author">Becky Chambers</p>
+</div>
+<button class="shortlist-btn" data-book-id="a-psalm-for-the-wild-built-becky-chambers" onclick="toggleShortlist('a-psalm-for-the-wild-built-becky-chambers')" type="button">❤ Talvez</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">160 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Um monge do chá conhece um robô e começa a perguntar o que realmente é uma vida boa.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer algo curto, gentil e que cure silenciosamente, em vez de um enredo pesado.</p>
+<div class="tag-row"><span class="tag">aconchegante</span><span class="tag">ficção científica</span><span class="tag">esperançoso</span><span class="tag">curto</span><span class="tag">filosófico</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=A+Psalm+for+the+Wild-Built+Becky+Chambers+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card top-pick-card" data-book-id="small-miracles-olivia-atwater" data-category="Aconchegante / suave / gostosinho" data-english="Medium" data-search="small miracles olivia atwater aconchegante / suave / gostosinho um pequeno demônio tenta corromper uma bela mulher e acidentalmente começa a direcionar sua vida para melhores direções. você vai gostar se... ela quer inteligência, calor e uma configuração sobrenatural lúdica sem um grande compromisso. fantasia engraçado romance anjos e demônios aconchegante 249 págs. inglês intermediário tom leve" data-tone="Light" id="small-miracles-olivia-atwater">
+<div class="cover-wrap">
+<img alt="Capa de Small Miracles" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/small-miracles-olivia-atwater.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Small Miracles</div>
+<div class="cover-fallback-author">Olivia Atwater</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Small Miracles</h3>
+<p class="author">Olivia Atwater</p>
+</div>
+<button class="shortlist-btn" data-book-id="small-miracles-olivia-atwater" onclick="toggleShortlist('small-miracles-olivia-atwater')" type="button">❤ Talvez</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">249 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Um pequeno demônio tenta corromper uma bela mulher e acidentalmente começa a direcionar sua vida para melhores direções.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer inteligência, calor e uma configuração sobrenatural lúdica sem um grande compromisso.</p>
+<div class="tag-row"><span class="tag">fantasia</span><span class="tag">engraçado</span><span class="tag">romance</span><span class="tag">anjos e demônios</span><span class="tag">aconchegante</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Small+Miracles+Olivia+Atwater+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card top-pick-card" data-book-id="the-kamogawa-food-detectives-hisashi-kashiwai" data-category="Aconchegante / suave / gostosinho" data-english="Easier" data-search="the kamogawa food detectives hisashi kashiwai aconchegante / suave / gostosinho uma dupla de pai e filha de quioto recria pratos a partir das memórias das pessoas e resolve enigmas emocionais através da comida. você vai gostar se... ela quer calor, comida e histórias episódicas que sejam fáceis de parar e reiniciar. japonês comida aconchegante memória gentil mistério 208 págs. inglês mais fácil tom leve" data-tone="Light" id="the-kamogawa-food-detectives-hisashi-kashiwai">
+<div class="cover-wrap">
+<img alt="Capa de The Kamogawa Food Detectives" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-kamogawa-food-detectives-hisashi-kashiwai.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Kamogawa Food Detectives</div>
+<div class="cover-fallback-author">Hisashi Kashiwai</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Kamogawa Food Detectives</h3>
+<p class="author">Hisashi Kashiwai</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-kamogawa-food-detectives-hisashi-kashiwai" onclick="toggleShortlist('the-kamogawa-food-detectives-hisashi-kashiwai')" type="button">❤ Talvez</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">208 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Uma dupla de pai e filha de Quioto recria pratos a partir das memórias das pessoas e resolve enigmas emocionais através da comida.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer calor, comida e histórias episódicas que sejam fáceis de parar e reiniciar.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">comida</span><span class="tag">aconchegante</span><span class="tag">memória</span><span class="tag">gentil mistério</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Kamogawa+Food+Detectives+Hisashi+Kashiwai+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card top-pick-card" data-book-id="convenience-store-woman-sayaka-murata" data-category="Japonês / coreano / traduzido" data-english="Easier" data-search="convenience store woman sayaka murata japonês / coreano / traduzido uma mulher que se sente mais viva dentro das regras das lojas de conveniência resiste à ideia de vida adulta normal de todos os outros. você vai gostar se... ela gosta de livros curtos, estranhos e atraentes, com frases muito claras e uma premissa forte. japonês engraçado-estranho local de trabalho curto clássico moderno 176 págs. inglês mais fácil tom misto" data-tone="Mixed" id="convenience-store-woman-sayaka-murata">
+<div class="cover-wrap">
+<img alt="Capa de Convenience Store Woman" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/convenience-store-woman-sayaka-murata.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Convenience Store Woman</div>
+<div class="cover-fallback-author">Sayaka Murata</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Convenience Store Woman</h3>
+<p class="author">Sayaka Murata</p>
+</div>
+<button class="shortlist-btn" data-book-id="convenience-store-woman-sayaka-murata" onclick="toggleShortlist('convenience-store-woman-sayaka-murata')" type="button">❤ Talvez</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">176 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Uma mulher que se sente mais viva dentro das regras das lojas de conveniência resiste à ideia de vida adulta normal de todos os outros.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela gosta de livros curtos, estranhos e atraentes, com frases muito claras e uma premissa forte.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">engraçado-estranho</span><span class="tag">local de trabalho</span><span class="tag">curto</span><span class="tag">clássico moderno</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Convenience+Store+Woman+Sayaka+Murata+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card top-pick-card" data-book-id="the-guest-cat-takashi-hiraide" data-category="Japonês / coreano / traduzido" data-english="Easier" data-search="the guest cat takashi hiraide japonês / coreano / traduzido um pequeno gato da vizinhança entra na vida de um casal e altera silenciosamente seu senso de lar, tempo e apego. você vai gostar se... ela quer algo muito curto, calmo e emocionalmente suave. japonês gato quieto pequeno gentil 144 págs. inglês mais fácil tom leve" data-tone="Light" id="the-guest-cat-takashi-hiraide">
+<div class="cover-wrap">
+<img alt="Capa de The Guest Cat" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-guest-cat-takashi-hiraide.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Guest Cat</div>
+<div class="cover-fallback-author">Takashi Hiraide</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Guest Cat</h3>
+<p class="author">Takashi Hiraide</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-guest-cat-takashi-hiraide" onclick="toggleShortlist('the-guest-cat-takashi-hiraide')" type="button">❤ Talvez</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">144 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Um pequeno gato da vizinhança entra na vida de um casal e altera silenciosamente seu senso de lar, tempo e apego.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer algo muito curto, calmo e emocionalmente suave.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">gato</span><span class="tag">quieto</span><span class="tag">pequeno</span><span class="tag">gentil</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Guest+Cat+Takashi+Hiraide+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card top-pick-card" data-book-id="the-westing-game-ellen-raskin" data-category="Mistério / inteligente / quebra-cabeça" data-english="Easier" data-search="the westing game ellen raskin mistério / inteligente / quebra-cabeça dezesseis herdeiros são levados a um jogo de herança com pistas, pseudônimos, jogos de palavras e reversões. você vai gostar se... ela gosta mais da inteligência do que da escuridão e quer algo divertido. quebra-cabeça clássico ya peculiar esperto mistério familiar 240 págs. inglês mais fácil tom leve" data-tone="Light" id="the-westing-game-ellen-raskin">
+<div class="cover-wrap">
+<img alt="Capa de The Westing Game" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-westing-game-ellen-raskin.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Westing Game</div>
+<div class="cover-fallback-author">Ellen Raskin</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Westing Game</h3>
+<p class="author">Ellen Raskin</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-westing-game-ellen-raskin" onclick="toggleShortlist('the-westing-game-ellen-raskin')" type="button">❤ Talvez</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">240 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Dezesseis herdeiros são levados a um jogo de herança com pistas, pseudônimos, jogos de palavras e reversões.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela gosta mais da inteligência do que da escuridão e quer algo divertido.</p>
+<div class="tag-row"><span class="tag">quebra-cabeça</span><span class="tag">clássico YA</span><span class="tag">peculiar</span><span class="tag">esperto</span><span class="tag">mistério familiar</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Westing+Game+Ellen+Raskin+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+</div>
+</section>
+<div class="empty-state" id="emptyState"><strong>Nenhum resultado com os filtros atuais.</strong><br/>Tente uma busca mais ampla, mude de categoria ou desative “mostrar só a lista curta”.</div>
+<section class="category-section" data-category-section="Drama teen / entrada fácil" id="teen-drama-easy-entry">
+<div class="section-head">
+<h2>Drama teen / entrada fácil</h2>
+<span class="section-count">5 livros</span>
+</div>
+<div class="book-grid">
+<article class="book-card" data-book-id="gossip-girl-cecily-von-ziegesar" data-category="Drama teen / entrada fácil" data-english="Easier" data-search="gossip girl cecily von ziegesar drama teen / entrada fácil escândalo, conexões, traição e guerra social entre adolescentes ricos do upper east side. você vai gostar se... ela gosta de drama brilhante, bagunça de garoto rico e capítulos que avançam rápido. ya fofoca romance energia do drama de tv fácil 224 págs. inglês mais fácil tom leve" data-tone="Light" id="gossip-girl-cecily-von-ziegesar">
+<div class="cover-wrap">
+<img alt="Capa de Gossip Girl" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/gossip-girl-cecily-von-ziegesar.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Gossip Girl</div>
+<div class="cover-fallback-author">Cecily von Ziegesar</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Gossip Girl</h3>
+<p class="author">Cecily von Ziegesar</p>
+</div>
+<button class="shortlist-btn" data-book-id="gossip-girl-cecily-von-ziegesar" onclick="toggleShortlist('gossip-girl-cecily-von-ziegesar')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">224 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Escândalo, conexões, traição e guerra social entre adolescentes ricos do Upper East Side.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela gosta de drama brilhante, bagunça de garoto rico e capítulos que avançam rápido.</p>
+<div class="tag-row"><span class="tag">YA</span><span class="tag">fofoca</span><span class="tag">romance</span><span class="tag">Energia do drama de TV</span><span class="tag">fácil</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Gossip+Girl+Cecily+von+Ziegesar+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-clique-lisi-harrison" data-category="Drama teen / entrada fácil" data-english="Easier" data-search="the clique lisi harrison drama teen / entrada fácil uma nova garota entra em um grupo de amigos brutalmente hierárquico e descobre o quão mesquinha a política escolar da elite pode ser. você vai gostar se... o combate social de garotas malvadas parece divertido e ela quer algo com muito baixo atrito. ya garotas malvadas drama escolar fácil 240 págs. inglês mais fácil tom leve" data-tone="Light" id="the-clique-lisi-harrison">
+<div class="cover-wrap">
+<img alt="Capa de The Clique" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-clique-lisi-harrison.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Clique</div>
+<div class="cover-fallback-author">Lisi Harrison</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Clique</h3>
+<p class="author">Lisi Harrison</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-clique-lisi-harrison" onclick="toggleShortlist('the-clique-lisi-harrison')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">240 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Uma nova garota entra em um grupo de amigos brutalmente hierárquico e descobre o quão mesquinha a política escolar da elite pode ser.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> O combate social de garotas malvadas parece divertido e ela quer algo com muito baixo atrito.</p>
+<div class="tag-row"><span class="tag">YA</span><span class="tag">garotas malvadas</span><span class="tag">drama escolar</span><span class="tag">fácil</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Clique+Lisi+Harrison+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="nick-norah-s-infinite-playlist-rachel-cohn-david-levithan" data-category="Drama teen / entrada fácil" data-english="Easier" data-search="nick &amp; norah's infinite playlist rachel cohn &amp; david levithan drama teen / entrada fácil dois adolescentes passam uma noite caótica vagando por nova york, perseguindo uma banda, esquivando-se de ex-namorados e caindo na órbita um do outro. você vai gostar se... ela quer brincadeiras, flertes e uma voz moderna muito conversadora. ya romance brincadeira música fácil 183 págs. inglês mais fácil tom leve" data-tone="Light" id="nick-norah-s-infinite-playlist-rachel-cohn-david-levithan">
+<div class="cover-wrap">
+<img alt="Capa de Nick &amp; Norah's Infinite Playlist" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/nick-norah-s-infinite-playlist-rachel-cohn-david-levithan.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Nick &amp; Norah's Infinite Playlist</div>
+<div class="cover-fallback-author">Rachel Cohn &amp; David Levithan</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Nick &amp; Norah's Infinite Playlist</h3>
+<p class="author">Rachel Cohn &amp; David Levithan</p>
+</div>
+<button class="shortlist-btn" data-book-id="nick-norah-s-infinite-playlist-rachel-cohn-david-levithan" onclick="toggleShortlist('nick-norah-s-infinite-playlist-rachel-cohn-david-levithan')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">183 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Dois adolescentes passam uma noite caótica vagando por Nova York, perseguindo uma banda, esquivando-se de ex-namorados e caindo na órbita um do outro.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer brincadeiras, flertes e uma voz moderna muito conversadora.</p>
+<div class="tag-row"><span class="tag">YA</span><span class="tag">romance</span><span class="tag">brincadeira</span><span class="tag">música</span><span class="tag">fácil</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Nick+%26+Norah%27s+Infinite+Playlist+Rachel+Cohn+%26+David+Levithan+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="ttyl-lauren-myracle" data-category="Drama teen / entrada fácil" data-english="Easier" data-search="ttyl lauren myracle drama teen / entrada fácil três melhores amigos narram paixões, discussões e desastres através de mensagens instantâneas/chat. você vai gostar se... um romance completo em inglês parece intimidante e ela prefere algo pequeno na página. aviso: contado em formato de chat/im. ya formato de bate-papo amizade drama escolar fácil 219 págs. inglês mais fácil tom leve" data-tone="Light" id="ttyl-lauren-myracle">
+<div class="cover-wrap">
+<img alt="Capa de ttyl" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/ttyl-lauren-myracle.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">ttyl</div>
+<div class="cover-fallback-author">Lauren Myracle</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>ttyl</h3>
+<p class="author">Lauren Myracle</p>
+</div>
+<button class="shortlist-btn" data-book-id="ttyl-lauren-myracle" onclick="toggleShortlist('ttyl-lauren-myracle')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">219 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Três melhores amigos narram paixões, discussões e desastres através de mensagens instantâneas/chat.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Um romance completo em inglês parece intimidante e ela prefere algo pequeno na página.</p>
+<p class="caution"><strong>Aviso:</strong> Contado em formato de chat/IM.</p>
+<div class="tag-row"><span class="tag">YA</span><span class="tag">formato de bate-papo</span><span class="tag">amizade</span><span class="tag">drama escolar</span><span class="tag">fácil</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=ttyl+Lauren+Myracle+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="pumpkinheads-rainbow-rowell-faith-erin-hicks" data-category="Drama teen / entrada fácil" data-english="Easier" data-search="pumpkinheads rainbow rowell &amp; faith erin hicks drama teen / entrada fácil dois amigos do canteiro de abóboras passam o último turno juntos em busca de lanches, paixões e talvez algo mais. você vai gostar se... ela quer sentimentos doces e muito apoio visual enquanto lê em inglês. aviso: novela gráfica; melhor em um tablet ou aplicativo kindle do que em um kindle e-ink em preto e branco. novela gráfica ya romance aconchegante visual 224 págs. inglês mais fácil tom leve" data-tone="Light" id="pumpkinheads-rainbow-rowell-faith-erin-hicks">
+<div class="cover-wrap">
+<img alt="Capa de Pumpkinheads" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/pumpkinheads-rainbow-rowell-faith-erin-hicks.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Pumpkinheads</div>
+<div class="cover-fallback-author">Rainbow Rowell &amp; Faith Erin Hicks</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Pumpkinheads</h3>
+<p class="author">Rainbow Rowell &amp; Faith Erin Hicks</p>
+</div>
+<button class="shortlist-btn" data-book-id="pumpkinheads-rainbow-rowell-faith-erin-hicks" onclick="toggleShortlist('pumpkinheads-rainbow-rowell-faith-erin-hicks')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">224 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Dois amigos do canteiro de abóboras passam o último turno juntos em busca de lanches, paixões e talvez algo mais.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer sentimentos doces e muito apoio visual enquanto lê em inglês.</p>
+<p class="caution"><strong>Aviso:</strong> Novela gráfica; melhor em um tablet ou aplicativo Kindle do que em um Kindle e-ink em preto e branco.</p>
+<div class="tag-row"><span class="tag">novela gráfica</span><span class="tag">YA</span><span class="tag">romance</span><span class="tag">aconchegante</span><span class="tag">visual</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Pumpkinheads+Rainbow+Rowell+%26+Faith+Erin+Hicks+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section class="category-section" data-category-section="Aconchegante / suave / gostosinho" id="cozy-gentle-feel-good">
+<div class="section-head">
+<h2>Aconchegante / suave / gostosinho</h2>
+<span class="section-count">5 livros</span>
+</div>
+<div class="book-grid">
+<article class="book-card" data-book-id="a-psalm-for-the-wild-built-becky-chambers" data-category="Aconchegante / suave / gostosinho" data-english="Easier" data-search="a psalm for the wild-built becky chambers aconchegante / suave / gostosinho um monge do chá conhece um robô e começa a perguntar o que realmente é uma vida boa. você vai gostar se... ela quer algo curto, gentil e que cure silenciosamente, em vez de um enredo pesado. aconchegante ficção científica esperançoso curto filosófico 160 págs. inglês mais fácil tom leve" data-tone="Light" id="a-psalm-for-the-wild-built-becky-chambers">
+<div class="cover-wrap">
+<img alt="Capa de A Psalm for the Wild-Built" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/a-psalm-for-the-wild-built-becky-chambers.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">A Psalm for the Wild-Built</div>
+<div class="cover-fallback-author">Becky Chambers</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>A Psalm for the Wild-Built</h3>
+<p class="author">Becky Chambers</p>
+</div>
+<button class="shortlist-btn" data-book-id="a-psalm-for-the-wild-built-becky-chambers" onclick="toggleShortlist('a-psalm-for-the-wild-built-becky-chambers')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">160 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Um monge do chá conhece um robô e começa a perguntar o que realmente é uma vida boa.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer algo curto, gentil e que cure silenciosamente, em vez de um enredo pesado.</p>
+<div class="tag-row"><span class="tag">aconchegante</span><span class="tag">ficção científica</span><span class="tag">esperançoso</span><span class="tag">curto</span><span class="tag">filosófico</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=A+Psalm+for+the+Wild-Built+Becky+Chambers+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="a-prayer-for-the-crown-shy-becky-chambers" data-category="Aconchegante / suave / gostosinho" data-english="Easier" data-search="a prayer for the crown-shy becky chambers aconchegante / suave / gostosinho o monge e o robô continuam vagando, conversando, ajudando as pessoas e desvendando suavemente o que significa realização. você vai gostar se... ela gosta da ideia de uma leitura suave e cuidadosa do tamanho de uma sequência, sem estresse. aviso: funciona melhor depois de a psalm for the wild-built. aconchegante ficção científica esperançoso curto 160 págs. inglês mais fácil tom leve" data-tone="Light" id="a-prayer-for-the-crown-shy-becky-chambers">
+<div class="cover-wrap">
+<img alt="Capa de A Prayer for the Crown-Shy" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/a-prayer-for-the-crown-shy-becky-chambers.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">A Prayer for the Crown-Shy</div>
+<div class="cover-fallback-author">Becky Chambers</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>A Prayer for the Crown-Shy</h3>
+<p class="author">Becky Chambers</p>
+</div>
+<button class="shortlist-btn" data-book-id="a-prayer-for-the-crown-shy-becky-chambers" onclick="toggleShortlist('a-prayer-for-the-crown-shy-becky-chambers')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">160 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">O monge e o robô continuam vagando, conversando, ajudando as pessoas e desvendando suavemente o que significa realização.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela gosta da ideia de uma leitura suave e cuidadosa do tamanho de uma sequência, sem estresse.</p>
+<p class="caution"><strong>Aviso:</strong> Funciona melhor depois de A Psalm for the Wild-Built.</p>
+<div class="tag-row"><span class="tag">aconchegante</span><span class="tag">ficção científica</span><span class="tag">esperançoso</span><span class="tag">curto</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=A+Prayer+for+the+Crown-Shy+Becky+Chambers+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="small-miracles-olivia-atwater" data-category="Aconchegante / suave / gostosinho" data-english="Medium" data-search="small miracles olivia atwater aconchegante / suave / gostosinho um pequeno demônio tenta corromper uma bela mulher e acidentalmente começa a direcionar sua vida para melhores direções. você vai gostar se... ela quer inteligência, calor e uma configuração sobrenatural lúdica sem um grande compromisso. fantasia engraçado romance anjos e demônios aconchegante 249 págs. inglês intermediário tom leve" data-tone="Light" id="small-miracles-olivia-atwater">
+<div class="cover-wrap">
+<img alt="Capa de Small Miracles" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/small-miracles-olivia-atwater.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Small Miracles</div>
+<div class="cover-fallback-author">Olivia Atwater</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Small Miracles</h3>
+<p class="author">Olivia Atwater</p>
+</div>
+<button class="shortlist-btn" data-book-id="small-miracles-olivia-atwater" onclick="toggleShortlist('small-miracles-olivia-atwater')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">249 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Um pequeno demônio tenta corromper uma bela mulher e acidentalmente começa a direcionar sua vida para melhores direções.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer inteligência, calor e uma configuração sobrenatural lúdica sem um grande compromisso.</p>
+<div class="tag-row"><span class="tag">fantasia</span><span class="tag">engraçado</span><span class="tag">romance</span><span class="tag">anjos e demônios</span><span class="tag">aconchegante</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Small+Miracles+Olivia+Atwater+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-cybernetic-tea-shop-meredith-katz" data-category="Aconchegante / suave / gostosinho" data-english="Easier" data-search="the cybernetic tea shop meredith katz aconchegante / suave / gostosinho um robô senciente e o dono de uma casa de chá constroem lentamente confiança, rotina e afeto. você vai gostar se... ela quer algo minúsculo, gentil e queer-romântico, sem muita complexidade de enredo. sáfico aconchegante robô romance muito curto 116 págs. inglês mais fácil tom leve" data-tone="Light" id="the-cybernetic-tea-shop-meredith-katz">
+<div class="cover-wrap">
+<img alt="Capa de The Cybernetic Tea Shop" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-cybernetic-tea-shop-meredith-katz.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Cybernetic Tea Shop</div>
+<div class="cover-fallback-author">Meredith Katz</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Cybernetic Tea Shop</h3>
+<p class="author">Meredith Katz</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-cybernetic-tea-shop-meredith-katz" onclick="toggleShortlist('the-cybernetic-tea-shop-meredith-katz')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">116 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Um robô senciente e o dono de uma casa de chá constroem lentamente confiança, rotina e afeto.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer algo minúsculo, gentil e queer-romântico, sem muita complexidade de enredo.</p>
+<div class="tag-row"><span class="tag">sáfico</span><span class="tag">aconchegante</span><span class="tag">robô</span><span class="tag">romance</span><span class="tag">muito curto</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Cybernetic+Tea+Shop+Meredith+Katz+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-kamogawa-food-detectives-hisashi-kashiwai" data-category="Aconchegante / suave / gostosinho" data-english="Easier" data-search="the kamogawa food detectives hisashi kashiwai aconchegante / suave / gostosinho uma dupla de pai e filha de quioto recria pratos a partir das memórias das pessoas e resolve enigmas emocionais através da comida. você vai gostar se... ela quer calor, comida e histórias episódicas que sejam fáceis de parar e reiniciar. japonês comida aconchegante memória gentil mistério 208 págs. inglês mais fácil tom leve" data-tone="Light" id="the-kamogawa-food-detectives-hisashi-kashiwai">
+<div class="cover-wrap">
+<img alt="Capa de The Kamogawa Food Detectives" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-kamogawa-food-detectives-hisashi-kashiwai.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Kamogawa Food Detectives</div>
+<div class="cover-fallback-author">Hisashi Kashiwai</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Kamogawa Food Detectives</h3>
+<p class="author">Hisashi Kashiwai</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-kamogawa-food-detectives-hisashi-kashiwai" onclick="toggleShortlist('the-kamogawa-food-detectives-hisashi-kashiwai')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">208 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Uma dupla de pai e filha de Quioto recria pratos a partir das memórias das pessoas e resolve enigmas emocionais através da comida.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer calor, comida e histórias episódicas que sejam fáceis de parar e reiniciar.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">comida</span><span class="tag">aconchegante</span><span class="tag">memória</span><span class="tag">gentil mistério</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Kamogawa+Food+Detectives+Hisashi+Kashiwai+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section class="category-section" data-category-section="Japonês / coreano / traduzido" id="japanese-korean-translated">
+<div class="section-head">
+<h2>Japonês / coreano / traduzido</h2>
+<span class="section-count">11 livros</span>
+</div>
+<div class="book-grid">
+<article class="book-card" data-book-id="convenience-store-woman-sayaka-murata" data-category="Japonês / coreano / traduzido" data-english="Easier" data-search="convenience store woman sayaka murata japonês / coreano / traduzido uma mulher que se sente mais viva dentro das regras das lojas de conveniência resiste à ideia de vida adulta normal de todos os outros. você vai gostar se... ela gosta de livros curtos, estranhos e atraentes, com frases muito claras e uma premissa forte. japonês engraçado-estranho local de trabalho curto clássico moderno 176 págs. inglês mais fácil tom misto" data-tone="Mixed" id="convenience-store-woman-sayaka-murata">
+<div class="cover-wrap">
+<img alt="Capa de Convenience Store Woman" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/convenience-store-woman-sayaka-murata.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Convenience Store Woman</div>
+<div class="cover-fallback-author">Sayaka Murata</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Convenience Store Woman</h3>
+<p class="author">Sayaka Murata</p>
+</div>
+<button class="shortlist-btn" data-book-id="convenience-store-woman-sayaka-murata" onclick="toggleShortlist('convenience-store-woman-sayaka-murata')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">176 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Uma mulher que se sente mais viva dentro das regras das lojas de conveniência resiste à ideia de vida adulta normal de todos os outros.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela gosta de livros curtos, estranhos e atraentes, com frases muito claras e uma premissa forte.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">engraçado-estranho</span><span class="tag">local de trabalho</span><span class="tag">curto</span><span class="tag">clássico moderno</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Convenience+Store+Woman+Sayaka+Murata+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="kitchen-banana-yoshimoto" data-category="Japonês / coreano / traduzido" data-english="Medium" data-search="kitchen banana yoshimoto japonês / coreano / traduzido duas histórias ternas sobre a dor, o lar, a família escolhida e o estranho conforto da vida cotidiana. você vai gostar se... ela quer algo emocionante e bonito, sem ser enorme ou muito complicado. japonês melancolia amor pesar curto 152 págs. inglês intermediário tom misto" data-tone="Mixed" id="kitchen-banana-yoshimoto">
+<div class="cover-wrap">
+<img alt="Capa de Kitchen" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/kitchen-banana-yoshimoto.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Kitchen</div>
+<div class="cover-fallback-author">Banana Yoshimoto</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Kitchen</h3>
+<p class="author">Banana Yoshimoto</p>
+</div>
+<button class="shortlist-btn" data-book-id="kitchen-banana-yoshimoto" onclick="toggleShortlist('kitchen-banana-yoshimoto')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">152 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Duas histórias ternas sobre a dor, o lar, a família escolhida e o estranho conforto da vida cotidiana.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer algo emocionante e bonito, sem ser enorme ou muito complicado.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">melancolia</span><span class="tag">amor</span><span class="tag">pesar</span><span class="tag">curto</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Kitchen+Banana+Yoshimoto+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="before-the-coffee-gets-cold-toshikazu-kawaguchi" data-category="Japonês / coreano / traduzido" data-english="Medium" data-search="before the coffee gets cold toshikazu kawaguchi japonês / coreano / traduzido um pequeno café em tóquio permite que os clientes revisitem o passado, mas apenas sob regras rígidas e agridoces. você vai gostar se... ela quer uma premissa emocionante, com histórias episódicas discretas e muita recompensa emocional. aviso: a contagem de páginas varia muito de acordo com a edição. japonês viagem no tempo café emocional popular 224–283 págs. inglês intermediário tom misto" data-tone="Mixed" id="before-the-coffee-gets-cold-toshikazu-kawaguchi">
+<div class="cover-wrap">
+<img alt="Capa de Before the Coffee Gets Cold" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/before-the-coffee-gets-cold-toshikazu-kawaguchi.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Before the Coffee Gets Cold</div>
+<div class="cover-fallback-author">Toshikazu Kawaguchi</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Before the Coffee Gets Cold</h3>
+<p class="author">Toshikazu Kawaguchi</p>
+</div>
+<button class="shortlist-btn" data-book-id="before-the-coffee-gets-cold-toshikazu-kawaguchi" onclick="toggleShortlist('before-the-coffee-gets-cold-toshikazu-kawaguchi')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">224–283 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Um pequeno café em Tóquio permite que os clientes revisitem o passado, mas apenas sob regras rígidas e agridoces.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer uma premissa emocionante, com histórias episódicas discretas e muita recompensa emocional.</p>
+<p class="caution"><strong>Aviso:</strong> A contagem de páginas varia muito de acordo com a edição.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">viagem no tempo</span><span class="tag">café</span><span class="tag">emocional</span><span class="tag">popular</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Before+the+Coffee+Gets+Cold+Toshikazu+Kawaguchi+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="strange-weather-in-tokyo-hiromi-kawakami" data-category="Japonês / coreano / traduzido" data-english="Medium" data-search="strange weather in tokyo hiromi kawakami japonês / coreano / traduzido uma mulher e seu ex-professor mergulham em um romance gentil, estranho e que floresce tardiamente. você vai gostar se... ela gosta mais de histórias de relacionamento suaves e atmosféricas do que de enredos sinuosos. japonês romance quieto adulto gentil 224 págs. inglês intermediário tom misto" data-tone="Mixed" id="strange-weather-in-tokyo-hiromi-kawakami">
+<div class="cover-wrap">
+<img alt="Capa de Strange Weather in Tokyo" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/strange-weather-in-tokyo-hiromi-kawakami.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Strange Weather in Tokyo</div>
+<div class="cover-fallback-author">Hiromi Kawakami</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Strange Weather in Tokyo</h3>
+<p class="author">Hiromi Kawakami</p>
+</div>
+<button class="shortlist-btn" data-book-id="strange-weather-in-tokyo-hiromi-kawakami" onclick="toggleShortlist('strange-weather-in-tokyo-hiromi-kawakami')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">224 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Uma mulher e seu ex-professor mergulham em um romance gentil, estranho e que floresce tardiamente.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela gosta mais de histórias de relacionamento suaves e atmosféricas do que de enredos sinuosos.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">romance</span><span class="tag">quieto</span><span class="tag">adulto</span><span class="tag">gentil</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Strange+Weather+in+Tokyo+Hiromi+Kawakami+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="diary-of-a-void-emi-yagi" data-category="Japonês / coreano / traduzido" data-english="Medium" data-search="diary of a void emi yagi japonês / coreano / traduzido uma funcionária de escritório finge uma gravidez para fugir das expectativas sexistas e descobre que a mentira muda tudo. você vai gostar se... ela gosta de sátira afiada no local de trabalho, humor inexpressivo e um forte gancho social. japonês escritório sátira feminista engraçado 224 págs. inglês intermediário tom misto" data-tone="Mixed" id="diary-of-a-void-emi-yagi">
+<div class="cover-wrap">
+<img alt="Capa de Diary of a Void" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/diary-of-a-void-emi-yagi.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Diary of a Void</div>
+<div class="cover-fallback-author">Emi Yagi</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Diary of a Void</h3>
+<p class="author">Emi Yagi</p>
+</div>
+<button class="shortlist-btn" data-book-id="diary-of-a-void-emi-yagi" onclick="toggleShortlist('diary-of-a-void-emi-yagi')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">224 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Uma funcionária de escritório finge uma gravidez para fugir das expectativas sexistas e descobre que a mentira muda tudo.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela gosta de sátira afiada no local de trabalho, humor inexpressivo e um forte gancho social.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">escritório</span><span class="tag">sátira</span><span class="tag">feminista</span><span class="tag">engraçado</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Diary+of+a+Void+Emi+Yagi+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-woman-in-the-purple-skirt-natsuko-imamura" data-category="Japonês / coreano / traduzido" data-english="Medium" data-search="the woman in the purple skirt natsuko imamura japonês / coreano / traduzido uma mulher solitária fica obcecada por outra mulher que ela observa, segue e manipula silenciosamente. você vai gostar se... ela quer ficção psicológica curta e assustadora, em vez de algo aconchegante. aviso: não é alegre. japonês obsessão sombriamente engraçado perturbador curto 224 págs. inglês intermediário tom sombrio" data-tone="Dark" id="the-woman-in-the-purple-skirt-natsuko-imamura">
+<div class="cover-wrap">
+<img alt="Capa de The Woman in the Purple Skirt" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-woman-in-the-purple-skirt-natsuko-imamura.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Woman in the Purple Skirt</div>
+<div class="cover-fallback-author">Natsuko Imamura</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Woman in the Purple Skirt</h3>
+<p class="author">Natsuko Imamura</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-woman-in-the-purple-skirt-natsuko-imamura" onclick="toggleShortlist('the-woman-in-the-purple-skirt-natsuko-imamura')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">224 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Uma mulher solitária fica obcecada por outra mulher que ela observa, segue e manipula silenciosamente.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer ficção psicológica curta e assustadora, em vez de algo aconchegante.</p>
+<p class="caution"><strong>Aviso:</strong> Não é alegre.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">obsessão</span><span class="tag">sombriamente engraçado</span><span class="tag">perturbador</span><span class="tag">curto</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Woman+in+the+Purple+Skirt+Natsuko+Imamura+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="hunchback-saou-ichikawa" data-category="Japonês / coreano / traduzido" data-english="Medium+" data-search="hunchback saou ichikawa japonês / coreano / traduzido uma novela contundente sobre deficiência, desejo, vida online, autonomia e a política de ser observado. você vai gostar se... ela quer algo pequeno, inteligente, adulto e intenso. aviso: curto, mas mais adulto e abrasivo do que as palhetas aconchegantes. japonês sombriamente engraçado afiado adulto muito curto 112 págs. inglês intermediário+ tom sombrio" data-tone="Dark" id="hunchback-saou-ichikawa">
+<div class="cover-wrap">
+<img alt="Capa de Hunchback" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/hunchback-saou-ichikawa.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Hunchback</div>
+<div class="cover-fallback-author">Saou Ichikawa</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Hunchback</h3>
+<p class="author">Saou Ichikawa</p>
+</div>
+<button class="shortlist-btn" data-book-id="hunchback-saou-ichikawa" onclick="toggleShortlist('hunchback-saou-ichikawa')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">112 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário+</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Uma novela contundente sobre deficiência, desejo, vida online, autonomia e a política de ser observado.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer algo pequeno, inteligente, adulto e intenso.</p>
+<p class="caution"><strong>Aviso:</strong> Curto, mas mais adulto e abrasivo do que as palhetas aconchegantes.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">sombriamente engraçado</span><span class="tag">afiado</span><span class="tag">adulto</span><span class="tag">muito curto</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Hunchback+Saou+Ichikawa+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-housekeeper-and-the-professor-yoko-ogawa" data-category="Japonês / coreano / traduzido" data-english="Medium" data-search="the housekeeper and the professor yoko ogawa japonês / coreano / traduzido uma governanta, seu filho e um matemático com apenas oitenta minutos de memória de curto prazo formam uma pequena família frágil. você vai gostar se... ela gosta de livros emocionais suaves com uma premissa estranha, mas fácil de entender. japonês matemática gentil família doce 192 págs. inglês intermediário tom leve" data-tone="Light" id="the-housekeeper-and-the-professor-yoko-ogawa">
+<div class="cover-wrap">
+<img alt="Capa de The Housekeeper and the Professor" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-housekeeper-and-the-professor-yoko-ogawa.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Housekeeper and the Professor</div>
+<div class="cover-fallback-author">Yoko Ogawa</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Housekeeper and the Professor</h3>
+<p class="author">Yoko Ogawa</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-housekeeper-and-the-professor-yoko-ogawa" onclick="toggleShortlist('the-housekeeper-and-the-professor-yoko-ogawa')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">192 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Uma governanta, seu filho e um matemático com apenas oitenta minutos de memória de curto prazo formam uma pequena família frágil.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela gosta de livros emocionais suaves com uma premissa estranha, mas fácil de entender.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">matemática</span><span class="tag">gentil</span><span class="tag">família</span><span class="tag">doce</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Housekeeper+and+the+Professor+Yoko+Ogawa+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-guest-cat-takashi-hiraide" data-category="Japonês / coreano / traduzido" data-english="Easier" data-search="the guest cat takashi hiraide japonês / coreano / traduzido um pequeno gato da vizinhança entra na vida de um casal e altera silenciosamente seu senso de lar, tempo e apego. você vai gostar se... ela quer algo muito curto, calmo e emocionalmente suave. japonês gato quieto pequeno gentil 144 págs. inglês mais fácil tom leve" data-tone="Light" id="the-guest-cat-takashi-hiraide">
+<div class="cover-wrap">
+<img alt="Capa de The Guest Cat" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-guest-cat-takashi-hiraide.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Guest Cat</div>
+<div class="cover-fallback-author">Takashi Hiraide</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Guest Cat</h3>
+<p class="author">Takashi Hiraide</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-guest-cat-takashi-hiraide" onclick="toggleShortlist('the-guest-cat-takashi-hiraide')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">144 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Um pequeno gato da vizinhança entra na vida de um casal e altera silenciosamente seu senso de lar, tempo e apego.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer algo muito curto, calmo e emocionalmente suave.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">gato</span><span class="tag">quieto</span><span class="tag">pequeno</span><span class="tag">gentil</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Guest+Cat+Takashi+Hiraide+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-hole-hye-young-pyun" data-category="Japonês / coreano / traduzido" data-english="Medium" data-search="the hole hye-young pyun japonês / coreano / traduzido após um acidente, um homem acamado percebe que seu mundo está sendo destruído e enterrado ao seu redor. você vai gostar se... ela quer terror psicológico compacto e enervante, em vez de qualquer coisa fofa. aviso: desolador. coreano filme de ação horror psicológico escuro 208 págs. inglês intermediário tom sombrio" data-tone="Dark" id="the-hole-hye-young-pyun">
+<div class="cover-wrap">
+<img alt="Capa de The Hole" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-hole-hye-young-pyun.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Hole</div>
+<div class="cover-fallback-author">Hye-young Pyun</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Hole</h3>
+<p class="author">Hye-young Pyun</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-hole-hye-young-pyun" onclick="toggleShortlist('the-hole-hye-young-pyun')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">208 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Após um acidente, um homem acamado percebe que seu mundo está sendo destruído e enterrado ao seu redor.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer terror psicológico compacto e enervante, em vez de qualquer coisa fofa.</p>
+<p class="caution"><strong>Aviso:</strong> Desolador.</p>
+<div class="tag-row"><span class="tag">coreano</span><span class="tag">filme de ação</span><span class="tag">horror</span><span class="tag">psicológico</span><span class="tag">escuro</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Hole+Hye-young+Pyun+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-aosawa-murders-riku-onda" data-category="Japonês / coreano / traduzido" data-english="Medium+" data-search="the aosawa murders riku onda japonês / coreano / traduzido um envenenamento em massa deixa um sobrevivente e uma teia assustadora de testemunhos, poesia, obsessão e boatos. você vai gostar se... ela quer algo elegante, misterioso e adjacente ao mistério, em vez de ficção policial simples. aviso: mais literário e fragmentado do que as escolhas mais fáceis. japonês mistério literário escuro traduzido 160–176 págs. inglês intermediário+ tom sombrio" data-tone="Dark" id="the-aosawa-murders-riku-onda">
+<div class="cover-wrap">
+<img alt="Capa de The Aosawa Murders" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-aosawa-murders-riku-onda.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Aosawa Murders</div>
+<div class="cover-fallback-author">Riku Onda</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Aosawa Murders</h3>
+<p class="author">Riku Onda</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-aosawa-murders-riku-onda" onclick="toggleShortlist('the-aosawa-murders-riku-onda')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">160–176 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário+</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Um envenenamento em massa deixa um sobrevivente e uma teia assustadora de testemunhos, poesia, obsessão e boatos.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer algo elegante, misterioso e adjacente ao mistério, em vez de ficção policial simples.</p>
+<p class="caution"><strong>Aviso:</strong> Mais literário e fragmentado do que as escolhas mais fáceis.</p>
+<div class="tag-row"><span class="tag">japonês</span><span class="tag">mistério</span><span class="tag">literário</span><span class="tag">escuro</span><span class="tag">traduzido</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Aosawa+Murders+Riku+Onda+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section class="category-section" data-category-section="Especulativo / sobrenatural / romântico" id="speculative-supernatural-romantic">
+<div class="section-head">
+<h2>Especulativo / sobrenatural / romântico</h2>
+<span class="section-count">7 livros</span>
+</div>
+<div class="book-grid">
+<article class="book-card" data-book-id="every-heart-a-doorway-seanan-mcguire" data-category="Especulativo / sobrenatural / romântico" data-english="Medium" data-search="every heart a doorway seanan mcguire especulativo / sobrenatural / romântico crianças que antes iam para mundos mágicos agora vivem em uma escola para aqueles que voltaram errados por causa deste. você vai gostar se... ela gosta da ideia das consequências de nárnia, encontrou uma família e um gancho compacto de fantasia. fantasia de portal ya-ish queer internato curto 176 págs. inglês intermediário tom misto" data-tone="Mixed" id="every-heart-a-doorway-seanan-mcguire">
+<div class="cover-wrap">
+<img alt="Capa de Every Heart a Doorway" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/every-heart-a-doorway-seanan-mcguire.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Every Heart a Doorway</div>
+<div class="cover-fallback-author">Seanan McGuire</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Every Heart a Doorway</h3>
+<p class="author">Seanan McGuire</p>
+</div>
+<button class="shortlist-btn" data-book-id="every-heart-a-doorway-seanan-mcguire" onclick="toggleShortlist('every-heart-a-doorway-seanan-mcguire')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">176 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Crianças que antes iam para mundos mágicos agora vivem em uma escola para aqueles que voltaram errados por causa deste.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela gosta da ideia das consequências de Nárnia, encontrou uma família e um gancho compacto de fantasia.</p>
+<div class="tag-row"><span class="tag">fantasia de portal</span><span class="tag">YA-ish</span><span class="tag">queer</span><span class="tag">internato</span><span class="tag">curto</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Every+Heart+a+Doorway+Seanan+McGuire+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-empress-of-salt-and-fortune-nghi-vo" data-category="Especulativo / sobrenatural / romântico" data-english="Medium+" data-search="the empress of salt and fortune nghi vo especulativo / sobrenatural / romântico um clérigo errante reúne as peças da vida de uma poderosa imperatriz exilada através de salas, objetos e histórias. você vai gostar se... ela quer uma pequena fantasia que pareça elegante e lindamente contada. aviso: mais lírico que as escolhas mais fáceis. fantasia queer exuberante novela de inspiração asiática 121–124 págs. inglês intermediário+ tom misto" data-tone="Mixed" id="the-empress-of-salt-and-fortune-nghi-vo">
+<div class="cover-wrap">
+<img alt="Capa de The Empress of Salt and Fortune" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-empress-of-salt-and-fortune-nghi-vo.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Empress of Salt and Fortune</div>
+<div class="cover-fallback-author">Nghi Vo</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Empress of Salt and Fortune</h3>
+<p class="author">Nghi Vo</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-empress-of-salt-and-fortune-nghi-vo" onclick="toggleShortlist('the-empress-of-salt-and-fortune-nghi-vo')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">121–124 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário+</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Um clérigo errante reúne as peças da vida de uma poderosa imperatriz exilada através de salas, objetos e histórias.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer uma pequena fantasia que pareça elegante e lindamente contada.</p>
+<p class="caution"><strong>Aviso:</strong> Mais lírico que as escolhas mais fáceis.</p>
+<div class="tag-row"><span class="tag">fantasia</span><span class="tag">queer</span><span class="tag">exuberante</span><span class="tag">novela</span><span class="tag">De inspiração asiática</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Empress+of+Salt+and+Fortune+Nghi+Vo+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="silver-in-the-wood-emily-tesh" data-category="Especulativo / sobrenatural / romântico" data-english="Medium" data-search="silver in the wood emily tesh especulativo / sobrenatural / romântico um folclorista e um misterioso homem selvagem colidem em um conto de fadas verde, assombrado e silenciosamente romântico. você vai gostar se... ela quer magia da floresta, saudade e algo minúsculo. fada floresta queer romântico novela 112 págs. inglês intermediário tom misto" data-tone="Mixed" id="silver-in-the-wood-emily-tesh">
+<div class="cover-wrap">
+<img alt="Capa de Silver in the Wood" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/silver-in-the-wood-emily-tesh.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Silver in the Wood</div>
+<div class="cover-fallback-author">Emily Tesh</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Silver in the Wood</h3>
+<p class="author">Emily Tesh</p>
+</div>
+<button class="shortlist-btn" data-book-id="silver-in-the-wood-emily-tesh" onclick="toggleShortlist('silver-in-the-wood-emily-tesh')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">112 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Um folclorista e um misterioso homem selvagem colidem em um conto de fadas verde, assombrado e silenciosamente romântico.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer magia da floresta, saudade e algo minúsculo.</p>
+<div class="tag-row"><span class="tag">fada</span><span class="tag">floresta</span><span class="tag">queer</span><span class="tag">romântico</span><span class="tag">novela</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Silver+in+the+Wood+Emily+Tesh+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="this-is-how-you-lose-the-time-war-amal-el-mohtar-max-gladstone" data-category="Especulativo / sobrenatural / romântico" data-english="Dense" data-search="this is how you lose the time war amal el-mohtar &amp; max gladstone especulativo / sobrenatural / romântico dois agentes rivais em uma guerra ao longo do tempo começam a trocar cartas e se apaixonam. você vai gostar se... ela quer intensidade, saudade e uma história de amor memorável. aviso: bonito, mas mais denso e estilizado do que as opções mais fáceis para iniciantes. ficção científica queer cartas romance aclamado 208 págs. inglês mais denso tom misto" data-tone="Mixed" id="this-is-how-you-lose-the-time-war-amal-el-mohtar-max-gladstone">
+<div class="cover-wrap">
+<img alt="Capa de This Is How You Lose the Time War" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/this-is-how-you-lose-the-time-war-amal-el-mohtar-max-gladstone.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">This Is How You Lose the Time War</div>
+<div class="cover-fallback-author">Amal El-Mohtar &amp; Max Gladstone</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>This Is How You Lose the Time War</h3>
+<p class="author">Amal El-Mohtar &amp; Max Gladstone</p>
+</div>
+<button class="shortlist-btn" data-book-id="this-is-how-you-lose-the-time-war-amal-el-mohtar-max-gladstone" onclick="toggleShortlist('this-is-how-you-lose-the-time-war-amal-el-mohtar-max-gladstone')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">208 págs.</span>
+<span class="pill difficulty diff-dense">Inglês mais denso</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Dois agentes rivais em uma guerra ao longo do tempo começam a trocar cartas e se apaixonam.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer intensidade, saudade e uma história de amor memorável.</p>
+<p class="caution"><strong>Aviso:</strong> Bonito, mas mais denso e estilizado do que as opções mais fáceis para iniciantes.</p>
+<div class="tag-row"><span class="tag">ficção científica</span><span class="tag">queer</span><span class="tag">cartas</span><span class="tag">romance</span><span class="tag">aclamado</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=This+Is+How+You+Lose+the+Time+War+Amal+El-Mohtar+%26+Max+Gladstone+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="even-though-i-knew-the-end-c-l-polk" data-category="Especulativo / sobrenatural / romântico" data-english="Medium" data-search="even though i knew the end c. l. polk especulativo / sobrenatural / romântico um detetive mágico caça um assassino enquanto negocia com o inferno um futuro com a mulher que ama. você vai gostar se... ela quer romance estranho, atmosfera noir e um mistério sobrenatural compacto. sáfico preto magia detetive curto 144 págs. inglês intermediário tom misto" data-tone="Mixed" id="even-though-i-knew-the-end-c-l-polk">
+<div class="cover-wrap">
+<img alt="Capa de Even Though I Knew the End" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/even-though-i-knew-the-end-c-l-polk.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Even Though I Knew the End</div>
+<div class="cover-fallback-author">C. L. Polk</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Even Though I Knew the End</h3>
+<p class="author">C. L. Polk</p>
+</div>
+<button class="shortlist-btn" data-book-id="even-though-i-knew-the-end-c-l-polk" onclick="toggleShortlist('even-though-i-knew-the-end-c-l-polk')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">144 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Um detetive mágico caça um assassino enquanto negocia com o inferno um futuro com a mulher que ama.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer romance estranho, atmosfera noir e um mistério sobrenatural compacto.</p>
+<div class="tag-row"><span class="tag">sáfico</span><span class="tag">preto</span><span class="tag">magia</span><span class="tag">detetive</span><span class="tag">curto</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Even+Though+I+Knew+the+End+C.+L.+Polk+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="a-spindle-splintered-alix-e-harrow" data-category="Especulativo / sobrenatural / romântico" data-english="Medium" data-search="a spindle splintered alix e. harrow especulativo / sobrenatural / romântico uma garota moderna com um diagnóstico sombrio cai na bela adormecida e decide que a velha história é inaceitável. você vai gostar se... ela quer algo espirituoso, rápido e de conto de fadas, sem ser antiquado. recontagem de conto de fadas engraçado feminista novela 112 págs. inglês intermediário tom leve" data-tone="Light" id="a-spindle-splintered-alix-e-harrow">
+<div class="cover-wrap">
+<img alt="Capa de A Spindle Splintered" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/a-spindle-splintered-alix-e-harrow.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">A Spindle Splintered</div>
+<div class="cover-fallback-author">Alix E. Harrow</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>A Spindle Splintered</h3>
+<p class="author">Alix E. Harrow</p>
+</div>
+<button class="shortlist-btn" data-book-id="a-spindle-splintered-alix-e-harrow" onclick="toggleShortlist('a-spindle-splintered-alix-e-harrow')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">112 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Uma garota moderna com um diagnóstico sombrio cai na Bela Adormecida e decide que a velha história é inaceitável.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer algo espirituoso, rápido e de conto de fadas, sem ser antiquado.</p>
+<div class="tag-row"><span class="tag">recontagem de conto de fadas</span><span class="tag">engraçado</span><span class="tag">feminista</span><span class="tag">novela</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=A+Spindle+Splintered+Alix+E.+Harrow+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="carmilla-j-sheridan-le-fanu" data-category="Especulativo / sobrenatural / romântico" data-english="Dense" data-search="carmilla j. sheridan le fanu especulativo / sobrenatural / romântico uma jovem solitária cai sob o feitiço de uma bela vampira em uma propriedade isolada. você vai gostar se... ela quer vibrações clássicas de vampiro sáfico mais do que linguagem estritamente moderna. aviso: clássico da língua antiga; incluído como um curinga de vampiro, não como uma leitura mais fácil. vampiro clássico sáfico gótico curto 108 págs. inglês mais denso tom sombrio" data-tone="Dark" id="carmilla-j-sheridan-le-fanu">
+<div class="cover-wrap">
+<img alt="Capa de Carmilla" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/carmilla-j-sheridan-le-fanu.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Carmilla</div>
+<div class="cover-fallback-author">J. Sheridan Le Fanu</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Carmilla</h3>
+<p class="author">J. Sheridan Le Fanu</p>
+</div>
+<button class="shortlist-btn" data-book-id="carmilla-j-sheridan-le-fanu" onclick="toggleShortlist('carmilla-j-sheridan-le-fanu')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">108 págs.</span>
+<span class="pill difficulty diff-dense">Inglês mais denso</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Uma jovem solitária cai sob o feitiço de uma bela vampira em uma propriedade isolada.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer vibrações clássicas de vampiro sáfico mais do que linguagem estritamente moderna.</p>
+<p class="caution"><strong>Aviso:</strong> Clássico da língua antiga; incluído como um curinga de vampiro, não como uma leitura mais fácil.</p>
+<div class="tag-row"><span class="tag">vampiro</span><span class="tag">clássico</span><span class="tag">sáfico</span><span class="tag">gótico</span><span class="tag">curto</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Carmilla+J.+Sheridan+Le+Fanu+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section class="category-section" data-category-section="Terror / estranho / diversão sombria" id="horror-weird-darkly-fun">
+<div class="section-head">
+<h2>Terror / estranho / diversão sombria</h2>
+<span class="section-count">8 livros</span>
+</div>
+<div class="book-grid">
+<article class="book-card" data-book-id="we-have-always-lived-in-the-castle-shirley-jackson" data-category="Terror / estranho / diversão sombria" data-english="Medium" data-search="we have always lived in the castle shirley jackson terror / estranho / diversão sombria duas irmãs se apegam ao seu estranho mundo isolado após a catástrofe familiar e o ódio na aldeia. você vai gostar se... ela quer vibrações góticas elegantes e perturbadoras, em vez de sangue. gótico psicológico clássico curto repugnante 162 págs. inglês intermediário tom sombrio" data-tone="Dark" id="we-have-always-lived-in-the-castle-shirley-jackson">
+<div class="cover-wrap">
+<img alt="Capa de We Have Always Lived in the Castle" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/we-have-always-lived-in-the-castle-shirley-jackson.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">We Have Always Lived in the Castle</div>
+<div class="cover-fallback-author">Shirley Jackson</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>We Have Always Lived in the Castle</h3>
+<p class="author">Shirley Jackson</p>
+</div>
+<button class="shortlist-btn" data-book-id="we-have-always-lived-in-the-castle-shirley-jackson" onclick="toggleShortlist('we-have-always-lived-in-the-castle-shirley-jackson')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">162 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Duas irmãs se apegam ao seu estranho mundo isolado após a catástrofe familiar e o ódio na aldeia.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer vibrações góticas elegantes e perturbadoras, em vez de sangue.</p>
+<div class="tag-row"><span class="tag">gótico</span><span class="tag">psicológico</span><span class="tag">clássico</span><span class="tag">curto</span><span class="tag">repugnante</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=We+Have+Always+Lived+in+the+Castle+Shirley+Jackson+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="what-moves-the-dead-t-kingfisher" data-category="Terror / estranho / diversão sombria" data-english="Medium" data-search="what moves the dead t. kingfisher terror / estranho / diversão sombria uma mansão em decomposição, animais errados, fungos errados e uma ressurreição profundamente errada transformam poe em um alegre terror gótico moderno. você vai gostar se... ela quer um terror assustador, vívido e acessível com uma premissa forte. gótico horror fúngico poe-ish novela 176 págs. inglês intermediário tom sombrio" data-tone="Dark" id="what-moves-the-dead-t-kingfisher">
+<div class="cover-wrap">
+<img alt="Capa de What Moves the Dead" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/what-moves-the-dead-t-kingfisher.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">What Moves the Dead</div>
+<div class="cover-fallback-author">T. Kingfisher</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>What Moves the Dead</h3>
+<p class="author">T. Kingfisher</p>
+</div>
+<button class="shortlist-btn" data-book-id="what-moves-the-dead-t-kingfisher" onclick="toggleShortlist('what-moves-the-dead-t-kingfisher')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">176 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Uma mansão em decomposição, animais errados, fungos errados e uma ressurreição profundamente errada transformam Poe em um alegre terror gótico moderno.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer um terror assustador, vívido e acessível com uma premissa forte.</p>
+<div class="tag-row"><span class="tag">gótico</span><span class="tag">horror fúngico</span><span class="tag">Poe-ish</span><span class="tag">novela</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=What+Moves+the+Dead+T.+Kingfisher+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="fever-dream-samanta-schweblin" data-category="Terror / estranho / diversão sombria" data-english="Dense" data-search="fever dream samanta schweblin terror / estranho / diversão sombria uma conversa febril revela lentamente o pavor ecológico, o medo maternal e algo terrivelmente errado no campo. você vai gostar se... ela quer um pesadelo literário curto. aviso: mais experimental e intenso. literário horror argentino traduzido curto 183 págs. inglês mais denso tom sombrio" data-tone="Dark" id="fever-dream-samanta-schweblin">
+<div class="cover-wrap">
+<img alt="Capa de Fever Dream" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/fever-dream-samanta-schweblin.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Fever Dream</div>
+<div class="cover-fallback-author">Samanta Schweblin</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Fever Dream</h3>
+<p class="author">Samanta Schweblin</p>
+</div>
+<button class="shortlist-btn" data-book-id="fever-dream-samanta-schweblin" onclick="toggleShortlist('fever-dream-samanta-schweblin')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">183 págs.</span>
+<span class="pill difficulty diff-dense">Inglês mais denso</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Uma conversa febril revela lentamente o pavor ecológico, o medo maternal e algo terrivelmente errado no campo.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer um pesadelo literário curto.</p>
+<p class="caution"><strong>Aviso:</strong> Mais experimental e intenso.</p>
+<div class="tag-row"><span class="tag">literário</span><span class="tag">horror</span><span class="tag">argentino</span><span class="tag">traduzido</span><span class="tag">curto</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Fever+Dream+Samanta+Schweblin+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="come-closer-sara-gran" data-category="Terror / estranho / diversão sombria" data-english="Medium" data-search="come closer sara gran terror / estranho / diversão sombria a vida estável de uma mulher começa a ruir sob o que pode ser uma possessão demoníaca ou um colapso psíquico total. você vai gostar se... ela quer terror propulsivo com uma prosa muito legível. posse psicológico horror curto 176 págs. inglês intermediário tom sombrio" data-tone="Dark" id="come-closer-sara-gran">
+<div class="cover-wrap">
+<img alt="Capa de Come Closer" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/come-closer-sara-gran.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Come Closer</div>
+<div class="cover-fallback-author">Sara Gran</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Come Closer</h3>
+<p class="author">Sara Gran</p>
+</div>
+<button class="shortlist-btn" data-book-id="come-closer-sara-gran" onclick="toggleShortlist('come-closer-sara-gran')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">176 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">A vida estável de uma mulher começa a ruir sob o que pode ser uma possessão demoníaca ou um colapso psíquico total.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer terror propulsivo com uma prosa muito legível.</p>
+<div class="tag-row"><span class="tag">posse</span><span class="tag">psicológico</span><span class="tag">horror</span><span class="tag">curto</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Come+Closer+Sara+Gran+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="night-of-the-mannequins-stephen-graham-jones" data-category="Terror / estranho / diversão sombria" data-english="Medium" data-search="night of the mannequins stephen graham jones terror / estranho / diversão sombria uma pegadinha envolvendo um manequim se transforma em algo assassino, absurdo e totalmente adolescente. você vai gostar se... ela quer algo curto, estranho e sombriamente engraçado. horror adolescente absurdo slasher novela 136 págs. inglês intermediário tom sombrio" data-tone="Dark" id="night-of-the-mannequins-stephen-graham-jones">
+<div class="cover-wrap">
+<img alt="Capa de Night of the Mannequins" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/night-of-the-mannequins-stephen-graham-jones.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Night of the Mannequins</div>
+<div class="cover-fallback-author">Stephen Graham Jones</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Night of the Mannequins</h3>
+<p class="author">Stephen Graham Jones</p>
+</div>
+<button class="shortlist-btn" data-book-id="night-of-the-mannequins-stephen-graham-jones" onclick="toggleShortlist('night-of-the-mannequins-stephen-graham-jones')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">136 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Uma pegadinha envolvendo um manequim se transforma em algo assassino, absurdo e totalmente adolescente.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer algo curto, estranho e sombriamente engraçado.</p>
+<div class="tag-row"><span class="tag">horror</span><span class="tag">adolescente</span><span class="tag">absurdo</span><span class="tag">slasher</span><span class="tag">novela</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Night+of+the+Mannequins+Stephen+Graham+Jones+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="ring-shout-p-dj-l-clark" data-category="Terror / estranho / diversão sombria" data-english="Medium+" data-search="ring shout p. djèlí clark terror / estranho / diversão sombria caçadores de monstros negros lutam contra demônios literais vestindo vestes da klan na américa dos anos 1920. você vai gostar se... ela quer algo feroz, imaginativo e curto. aviso: assunto mais sombrio e alguma voz estilizada. fantasia histórica caça aos monstros horror novela 105 págs. inglês intermediário+ tom sombrio" data-tone="Dark" id="ring-shout-p-dj-l-clark">
+<div class="cover-wrap">
+<img alt="Capa de Ring Shout" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/ring-shout-p-dj-l-clark.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Ring Shout</div>
+<div class="cover-fallback-author">P. Djèlí Clark</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Ring Shout</h3>
+<p class="author">P. Djèlí Clark</p>
+</div>
+<button class="shortlist-btn" data-book-id="ring-shout-p-dj-l-clark" onclick="toggleShortlist('ring-shout-p-dj-l-clark')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">105 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário+</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Caçadores de monstros negros lutam contra demônios literais vestindo vestes da Klan na América dos anos 1920.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer algo feroz, imaginativo e curto.</p>
+<p class="caution"><strong>Aviso:</strong> Assunto mais sombrio e alguma voz estilizada.</p>
+<div class="tag-row"><span class="tag">fantasia histórica</span><span class="tag">caça aos monstros</span><span class="tag">horror</span><span class="tag">novela</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Ring+Shout+P.+Dj%C3%A8l%C3%AD+Clark+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-grownup-gillian-flynn" data-category="Terror / estranho / diversão sombria" data-english="Easier" data-search="the grownup gillian flynn terror / estranho / diversão sombria uma falsa vidente é puxada para uma história desagradável de uma casa mal-assombrada que continua mudando sob seus pés. você vai gostar se... ela quer uma leitura assustadora e sem compromisso. filme de ação casa assombrada muito curto sinuoso 63 págs. inglês mais fácil tom sombrio" data-tone="Dark" id="the-grownup-gillian-flynn">
+<div class="cover-wrap">
+<img alt="Capa de The Grownup" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-grownup-gillian-flynn.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Grownup</div>
+<div class="cover-fallback-author">Gillian Flynn</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Grownup</h3>
+<p class="author">Gillian Flynn</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-grownup-gillian-flynn" onclick="toggleShortlist('the-grownup-gillian-flynn')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">63 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Uma falsa vidente é puxada para uma história desagradável de uma casa mal-assombrada que continua mudando sob seus pés.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer uma leitura assustadora e sem compromisso.</p>
+<div class="tag-row"><span class="tag">filme de ação</span><span class="tag">casa assombrada</span><span class="tag">muito curto</span><span class="tag">sinuoso</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Grownup+Gillian+Flynn+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="sour-candy-kealan-patrick-burke" data-category="Terror / estranho / diversão sombria" data-english="Easier" data-search="sour candy kealan patrick burke terror / estranho / diversão sombria um estranho deixa uma criança para trás e a vida de um homem comum se transforma em um pequeno pesadelo. você vai gostar se... ela quer o golpe de terror mais rápido possível. horror muito curto criança assustadora uma sentada 82 págs. inglês mais fácil tom sombrio" data-tone="Dark" id="sour-candy-kealan-patrick-burke">
+<div class="cover-wrap">
+<img alt="Capa de Sour Candy" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/sour-candy-kealan-patrick-burke.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Sour Candy</div>
+<div class="cover-fallback-author">Kealan Patrick Burke</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Sour Candy</h3>
+<p class="author">Kealan Patrick Burke</p>
+</div>
+<button class="shortlist-btn" data-book-id="sour-candy-kealan-patrick-burke" onclick="toggleShortlist('sour-candy-kealan-patrick-burke')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">82 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Um estranho deixa uma criança para trás e a vida de um homem comum se transforma em um pequeno pesadelo.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer o golpe de terror mais rápido possível.</p>
+<div class="tag-row"><span class="tag">horror</span><span class="tag">muito curto</span><span class="tag">criança assustadora</span><span class="tag">uma sentada</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Sour+Candy+Kealan+Patrick+Burke+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section class="category-section" data-category-section="Mistério / inteligente / quebra-cabeça" id="mystery-clever-puzzle-y">
+<div class="section-head">
+<h2>Mistério / inteligente / quebra-cabeça</h2>
+<span class="section-count">3 livros</span>
+</div>
+<div class="book-grid">
+<article class="book-card" data-book-id="the-mimicking-of-known-successes-malka-older" data-category="Mistério / inteligente / quebra-cabeça" data-english="Medium" data-search="the mimicking of known successes malka older mistério / inteligente / quebra-cabeça um mistério acadêmico holmesiano ambientado em plataformas suspensas na atmosfera de júpiter, com tensão sáfica e energia de salão de chá. você vai gostar se... ela quer mistério, romance e ficção científica, mas ainda no tamanho de uma novela. mistério sáfico ficção científica aconchegante vibração de sherlock 176 págs. inglês intermediário tom misto" data-tone="Mixed" id="the-mimicking-of-known-successes-malka-older">
+<div class="cover-wrap">
+<img alt="Capa de The Mimicking of Known Successes" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-mimicking-of-known-successes-malka-older.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Mimicking of Known Successes</div>
+<div class="cover-fallback-author">Malka Older</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Mimicking of Known Successes</h3>
+<p class="author">Malka Older</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-mimicking-of-known-successes-malka-older" onclick="toggleShortlist('the-mimicking-of-known-successes-malka-older')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">176 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Um mistério acadêmico holmesiano ambientado em plataformas suspensas na atmosfera de Júpiter, com tensão sáfica e energia de salão de chá.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer mistério, romance e ficção científica, mas ainda no tamanho de uma novela.</p>
+<div class="tag-row"><span class="tag">mistério</span><span class="tag">sáfico</span><span class="tag">ficção científica</span><span class="tag">aconchegante</span><span class="tag">Vibração de Sherlock</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Mimicking+of+Known+Successes+Malka+Older+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-honjin-murders-seishi-yokomizo" data-category="Mistério / inteligente / quebra-cabeça" data-english="Medium" data-search="the honjin murders seishi yokomizo mistério / inteligente / quebra-cabeça um casal recém-casado é encontrado assassinado em um quarto trancado na zona rural do japão, e o quebra-cabeça se desenrola. você vai gostar se... ela quer uma configuração clássica de detetive, mas em um romance compacto traduzido. mistério japonês quarto trancado crime clássico curto 192–224 págs. inglês intermediário tom misto" data-tone="Mixed" id="the-honjin-murders-seishi-yokomizo">
+<div class="cover-wrap">
+<img alt="Capa de The Honjin Murders" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-honjin-murders-seishi-yokomizo.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Honjin Murders</div>
+<div class="cover-fallback-author">Seishi Yokomizo</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Honjin Murders</h3>
+<p class="author">Seishi Yokomizo</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-honjin-murders-seishi-yokomizo" onclick="toggleShortlist('the-honjin-murders-seishi-yokomizo')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">192–224 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário</span>
+<span class="pill tone tone-mixed">Tom misto</span>
+</div>
+<p class="synopsis">Um casal recém-casado é encontrado assassinado em um quarto trancado na zona rural do Japão, e o quebra-cabeça se desenrola.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela quer uma configuração clássica de detetive, mas em um romance compacto traduzido.</p>
+<div class="tag-row"><span class="tag">Mistério japonês</span><span class="tag">quarto trancado</span><span class="tag">crime clássico</span><span class="tag">curto</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Honjin+Murders+Seishi+Yokomizo+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+<article class="book-card" data-book-id="the-westing-game-ellen-raskin" data-category="Mistério / inteligente / quebra-cabeça" data-english="Easier" data-search="the westing game ellen raskin mistério / inteligente / quebra-cabeça dezesseis herdeiros são levados a um jogo de herança com pistas, pseudônimos, jogos de palavras e reversões. você vai gostar se... ela gosta mais da inteligência do que da escuridão e quer algo divertido. quebra-cabeça clássico ya peculiar esperto mistério familiar 240 págs. inglês mais fácil tom leve" data-tone="Light" id="the-westing-game-ellen-raskin">
+<div class="cover-wrap">
+<img alt="Capa de The Westing Game" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/the-westing-game-ellen-raskin.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">The Westing Game</div>
+<div class="cover-fallback-author">Ellen Raskin</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>The Westing Game</h3>
+<p class="author">Ellen Raskin</p>
+</div>
+<button class="shortlist-btn" data-book-id="the-westing-game-ellen-raskin" onclick="toggleShortlist('the-westing-game-ellen-raskin')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">240 págs.</span>
+<span class="pill difficulty diff-easier">Inglês mais fácil</span>
+<span class="pill tone tone-light">Tom leve</span>
+</div>
+<p class="synopsis">Dezesseis herdeiros são levados a um jogo de herança com pistas, pseudônimos, jogos de palavras e reversões.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela gosta mais da inteligência do que da escuridão e quer algo divertido.</p>
+<div class="tag-row"><span class="tag">quebra-cabeça</span><span class="tag">clássico YA</span><span class="tag">peculiar</span><span class="tag">esperto</span><span class="tag">mistério familiar</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=The+Westing+Game+Ellen+Raskin+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+</div>
+</section>
+<section class="category-section" data-category-section="Contos / estranheza em pequenas doses" id="short-stories-bite-size-weird">
+<div class="section-head">
+<h2>Contos / estranheza em pequenas doses</h2>
+<span class="section-count">1 livro</span>
+</div>
+<div class="book-grid">
+<article class="book-card" data-book-id="cursed-bunny-bora-chung" data-category="Contos / estranheza em pequenas doses" data-english="Medium+" data-search="cursed bunny bora chung contos / estranheza em pequenas doses uma coleção coreana que salta entre o terror, a sátira, o realismo mágico e os grotescos contos de fadas anticapitalistas. você vai gostar se... ela prefere experimentar uma história estranha de cada vez, em vez de se comprometer com um longo enredo. aviso: um pouco acima do alvo da página, mas é uma coleção de histórias, então ainda é lida em pequenos pedaços. coreano contos horror surreal sátira 251–256 págs. inglês intermediário+ tom sombrio" data-tone="Dark" id="cursed-bunny-bora-chung">
+<div class="cover-wrap">
+<img alt="Capa de Cursed Bunny" class="cover" onerror="handleCoverError(this)" src="morgana_book_picker_covers/cursed-bunny-bora-chung.jpg"/>
+<div aria-hidden="true" class="cover-fallback">
+<div class="cover-fallback-title">Cursed Bunny</div>
+<div class="cover-fallback-author">Bora Chung</div>
+</div>
+</div>
+<div class="card-body">
+<div class="title-row">
+<div>
+<h3>Cursed Bunny</h3>
+<p class="author">Bora Chung</p>
+</div>
+<button class="shortlist-btn" data-book-id="cursed-bunny-bora-chung" onclick="toggleShortlist('cursed-bunny-bora-chung')" type="button">❤ Lista curta</button>
+</div>
+<div class="meta-row">
+<span class="pill meta">251–256 págs.</span>
+<span class="pill difficulty diff-medium">Inglês intermediário+</span>
+<span class="pill tone tone-dark">Tom sombrio</span>
+</div>
+<p class="synopsis">Uma coleção coreana que salta entre o terror, a sátira, o realismo mágico e os grotescos contos de fadas anticapitalistas.</p>
+<p class="like-if"><strong>Você vai gostar se...</strong> Ela prefere experimentar uma história estranha de cada vez, em vez de se comprometer com um longo enredo.</p>
+<p class="caution"><strong>Aviso:</strong> Um pouco acima do alvo da página, mas é uma coleção de histórias, então ainda é lida em pequenos pedaços.</p>
+<div class="tag-row"><span class="tag">coreano</span><span class="tag">contos</span><span class="tag">horror</span><span class="tag">surreal</span><span class="tag">sátira</span></div>
+<div class="card-actions">
+<a class="action-link" href="https://www.amazon.ca/s?k=Cursed+Bunny+Bora+Chung+Kindle" rel="noopener noreferrer" target="_blank">Buscar na Amazon/Kindle</a>
+</div>
+</div>
+</article>
+</div>
+</section>
+<footer>Feito para ajudar a escolher de 1 a 3 livros para realmente comprar e colocar no Kindle.</footer>
+</div>
+<script>
+    let currentCategory = "all";
+    let shortlistOnly = false;
+
+    function getShortlist() {
+      try {
+        return JSON.parse(localStorage.getItem("morganaBookShortlist") || "[]");
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function setShortlist(list) {
+      localStorage.setItem("morganaBookShortlist", JSON.stringify(list));
+    }
+
+    function toggleShortlist(bookId) {
+      const list = new Set(getShortlist());
+      if (list.has(bookId)) {
+        list.delete(bookId);
+      } else {
+        list.add(bookId);
+      }
+      setShortlist(Array.from(list));
+      syncShortlistButtons();
+      applyFilters();
+    }
+
+    function syncShortlistButtons() {
+      const list = new Set(getShortlist());
+      document.querySelectorAll(".shortlist-btn").forEach(btn => {
+        const id = btn.dataset.bookId;
+        const active = list.has(id);
+        btn.classList.toggle("active", active);
+        const isTop = btn.closest(".top-pick-card");
+        btn.textContent = active ? "❤ Na lista" : (isTop ? "❤ Talvez" : "❤ Lista curta");
+      });
+      const count = list.size;
+      const btn = document.getElementById("shortlistOnlyBtn");
+      btn.textContent = shortlistOnly ? `Mostrando só a lista curta (${count})` : `Mostrar só a lista curta${count ? ` (${count})` : ""}`;
+      btn.classList.toggle("active", shortlistOnly);
+    }
+
+    function setCategoryFilter(category, el) {
+      currentCategory = category;
+      document.querySelectorAll("#categoryChips .chip").forEach(chip => chip.classList.remove("active"));
+      el.classList.add("active");
+      applyFilters();
+    }
+
+    function toggleShortlistOnly() {
+      shortlistOnly = !shortlistOnly;
+      syncShortlistButtons();
+      applyFilters();
+    }
+
+    function clearAllFilters() {
+      currentCategory = "all";
+      shortlistOnly = false;
+      document.getElementById("searchInput").value = "";
+      document.querySelectorAll("#categoryChips .chip").forEach(chip => chip.classList.remove("active"));
+      const allChip = document.querySelector('#categoryChips .chip[data-category="all"]');
+      if (allChip) allChip.classList.add("active");
+      syncShortlistButtons();
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = (document.getElementById("searchInput").value || "").trim().toLowerCase();
+      const shortlist = new Set(getShortlist());
+      const cards = Array.from(document.querySelectorAll(".book-card"));
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const matchesCategory = currentCategory === "all" || card.dataset.category === currentCategory;
+        const matchesSearch = !q || card.dataset.search.includes(q);
+        const matchesShortlist = !shortlistOnly || shortlist.has(card.dataset.bookId);
+        const show = matchesCategory && matchesSearch && matchesShortlist;
+        card.classList.toggle("hidden", !show);
+        if (show && !card.classList.contains("top-pick-card")) visibleCount += 1;
+      });
+
+      document.querySelectorAll(".category-section").forEach(section => {
+        const visibleInSection = section.querySelectorAll(".book-card:not(.hidden)").length;
+        section.classList.toggle("hidden", visibleInSection === 0);
+      });
+
+      const topPicksSection = document.querySelector(".top-picks");
+      if (topPicksSection) {
+        const visibleTopPicks = topPicksSection.querySelectorAll(".book-card:not(.hidden)").length;
+        topPicksSection.classList.toggle("hidden", visibleTopPicks === 0);
+      }
+
+      const stats = document.getElementById("statsLine");
+      const parts = [];
+      parts.push(`Mostrando ${visibleCount} livro${visibleCount === 1 ? "" : "s"}`);
+      if (currentCategory !== "all") parts.push(`em ${currentCategory}`);
+      if (q) parts.push(`que correspondem a “${q}”`);
+      if (shortlistOnly) parts.push(`da sua lista curta`);
+      stats.textContent = parts.join(" ");
+
+      document.getElementById("emptyState").style.display = visibleCount === 0 ? "block" : "none";
+    }
+
+    function handleCoverError(img) {
+      img.style.display = "none";
+      const fallback = img.parentElement.querySelector(".cover-fallback");
+      if (fallback) fallback.style.display = "flex";
+    }
+
+    syncShortlistButtons();
+    applyFilters();
+  </script>
+</body>
+</html>
